@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3 uid="uid://b7br73si4hlje"]
+
+[ext_resource type="Script" uid="uid://b3nqec2b0hggh" path="res://resources/weapon_data/weapon_data.gd" id="1_2b80t"]
+[ext_resource type="PackedScene" uid="uid://ckmeyjdo4yefd" path="res://Scenes/weapons/magic_sword.tscn" id="2_adune"]
+[ext_resource type="PackedScene" uid="uid://bnvaah46xcrb8" path="res://Scenes/weapons/magic_sword_world.tscn" id="3_k14ll"]
+
+[resource]
+script = ExtResource("1_2b80t")
+weapon_name = "Magic Sword"
+weapon_scene = ExtResource("2_adune")
+world_model = ExtResource("3_k14ll")
+damage = 15
+metadata/_custom_type_script = "uid://b3nqec2b0hggh"

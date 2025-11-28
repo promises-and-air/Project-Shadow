@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckmeyjdo4yefd"]
+
+[ext_resource type="PackedScene" uid="uid://bbv55xis45ala" path="res://assets/weapons/sword2/Sword_2.glb" id="1_11nf0"]
+[ext_resource type="Material" uid="uid://de1iyle382gyw" path="res://assets/weapons/sword2/sword2_shader.tres" id="2_apiai"]
+
+[node name="PLA" instance=ExtResource("1_11nf0")]
+
+[node name="MagicSword" parent="." index="0"]
+transform = Transform3D(0.3646496, 0.55259967, 0.74944276, -0.5455036, 0.77905995, -0.309017, -0.7546235, -0.2961408, 0.58552897, 0, 0, 0)
+layers = 2
+surface_material_override/0 = ExtResource("2_apiai")

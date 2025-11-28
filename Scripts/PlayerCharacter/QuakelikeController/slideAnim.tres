@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ProceduralCurve" load_steps=3 format=3 uid="uid://b0t6fapfb6cnx"]
+
+[ext_resource type="Script" uid="uid://bmmijndfi05r7" path="res://Scripts/PlayerCharacter/QuakelikeController/ProceduralCurve.gd" id="1_nxj5x"]
+
+[sub_resource type="Curve" id="Curve_xjmdp"]
+_data = [Vector2(0, 0), 0.0, 1.01754, 0, 0, Vector2(1, 1), 1.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_nxj5x")
+curve = SubResource("Curve_xjmdp")
+length = 0.2

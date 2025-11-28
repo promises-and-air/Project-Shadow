@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://dbj141o4lhe7c"]
+
+[ext_resource type="Shader" uid="uid://da660fif3n7uf" path="res://assets/arm_rig/my_toon_shader.gdshader" id="1_10e6p"]
+[ext_resource type="Texture2D" uid="uid://dwuddj1j1q4kf" path="res://assets/arm_rig/Arm Rig_sleeve_texture.png" id="2_yhpdt"]
+
+[sub_resource type="Gradient" id="Gradient_yhpdt"]
+offsets = PackedFloat32Array(0.5, 0.51)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3ciue"]
+gradient = SubResource("Gradient_yhpdt")
+
+[sub_resource type="Gradient" id="Gradient_ibnm1"]
+offsets = PackedFloat32Array(0.58, 0.777)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t2260"]
+gradient = SubResource("Gradient_ibnm1")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_10e6p")
+shader_parameter/main_texture = ExtResource("2_yhpdt")
+shader_parameter/color_gradient = SubResource("GradientTexture2D_3ciue")
+shader_parameter/fresnel_gradient = SubResource("GradientTexture2D_t2260")

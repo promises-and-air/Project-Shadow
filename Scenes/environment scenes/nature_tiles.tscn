@@ -1,0 +1,112 @@
+[gd_scene load_steps=37 format=3 uid="uid://cx1jla7hauelq"]
+
+[ext_resource type="PackedScene" uid="uid://cj1qn8sxwolle" path="res://assets/nature/glTF/BirchTree_1.gltf" id="1_wnauj"]
+[ext_resource type="PackedScene" uid="uid://bdymfyl1526lg" path="res://assets/nature/glTF/BirchTree_2.gltf" id="2_himyh"]
+[ext_resource type="PackedScene" uid="uid://blnooo3600my7" path="res://assets/nature/glTF/BirchTree_3.gltf" id="3_xoshx"]
+[ext_resource type="PackedScene" uid="uid://cj0hqc0ld57sp" path="res://assets/nature/glTF/BirchTree_4.gltf" id="4_6v30c"]
+[ext_resource type="PackedScene" uid="uid://b87ypi5wkvqtm" path="res://assets/nature/glTF/BirchTree_5.gltf" id="5_if20i"]
+[ext_resource type="PackedScene" uid="uid://b4tfvt3tkshe8" path="res://assets/nature/glTF/Bush.gltf" id="6_xj681"]
+[ext_resource type="PackedScene" uid="uid://c0slpc3q6byss" path="res://assets/nature/glTF/Bush_Flowers.gltf" id="7_lpunb"]
+[ext_resource type="PackedScene" uid="uid://pp3n8yh3nw3d" path="res://assets/nature/glTF/Bush_Large.gltf" id="8_5lw4q"]
+[ext_resource type="PackedScene" uid="uid://cloo34fn1msuv" path="res://assets/nature/glTF/Bush_Large_Flowers.gltf" id="9_oeh0g"]
+[ext_resource type="PackedScene" uid="uid://4huxvclqw0w1" path="res://assets/nature/glTF/Bush_Small.gltf" id="10_o5xor"]
+[ext_resource type="PackedScene" uid="uid://dwpjijqn22bpt" path="res://assets/nature/glTF/Bush_Small_Flowers.gltf" id="11_55p22"]
+[ext_resource type="PackedScene" uid="uid://caxag4bb5wkra" path="res://assets/nature/glTF/DeadTree_1.gltf" id="12_r8nsj"]
+[ext_resource type="PackedScene" uid="uid://cjle3o5p3f8kd" path="res://assets/nature/glTF/DeadTree_2.gltf" id="13_3a25u"]
+[ext_resource type="PackedScene" uid="uid://c1lir5er36equ" path="res://assets/nature/glTF/DeadTree_3.gltf" id="14_vo78o"]
+[ext_resource type="PackedScene" uid="uid://e35pqpufflvw" path="res://assets/nature/glTF/DeadTree_4.gltf" id="15_3gxr6"]
+[ext_resource type="PackedScene" uid="uid://r6bhfme7wekj" path="res://assets/nature/glTF/DeadTree_5.gltf" id="16_mpw1b"]
+[ext_resource type="PackedScene" uid="uid://mfhsde2xmggi" path="res://assets/nature/glTF/DeadTree_6.gltf" id="17_gaxg3"]
+[ext_resource type="PackedScene" uid="uid://bp4tfxohhj0px" path="res://assets/nature/glTF/DeadTree_7.gltf" id="18_u5y3f"]
+[ext_resource type="PackedScene" uid="uid://fdi3s2bm7728" path="res://assets/nature/glTF/DeadTree_8.gltf" id="19_wbdhk"]
+[ext_resource type="PackedScene" uid="uid://dtmi1xwms1frk" path="res://assets/nature/glTF/DeadTree_9.gltf" id="20_vfjr0"]
+[ext_resource type="PackedScene" uid="uid://cb2ebkbp3h164" path="res://assets/nature/glTF/DeadTree_10.gltf" id="21_q3qw6"]
+[ext_resource type="PackedScene" uid="uid://qhkr5oe1rx40" path="res://assets/nature/glTF/Flower_1.gltf" id="22_4634i"]
+[ext_resource type="PackedScene" uid="uid://dntx83krk8li5" path="res://assets/nature/glTF/Flower_1_Clump.gltf" id="23_dhkng"]
+[ext_resource type="PackedScene" uid="uid://c0eg5dre1gd5l" path="res://assets/nature/glTF/Flower_2.gltf" id="24_jg5an"]
+[ext_resource type="PackedScene" uid="uid://2ljignp4tmy4" path="res://assets/nature/glTF/Flower_2_Clump.gltf" id="25_dundt"]
+[ext_resource type="PackedScene" uid="uid://tmfl6tmebcee" path="res://assets/nature/glTF/Flower_3_Clump.gltf" id="26_1ki5f"]
+[ext_resource type="PackedScene" uid="uid://b6a8cf4umy75p" path="res://assets/nature/glTF/Flower_4_Clump.gltf" id="27_h3my8"]
+[ext_resource type="PackedScene" uid="uid://cn3ysiwuwgiww" path="res://assets/nature/glTF/Flower_5_Clump.gltf" id="28_bdh4i"]
+[ext_resource type="PackedScene" uid="uid://dg2g406hdwtqt" path="res://assets/nature/glTF/Grass_Large.gltf" id="29_xwkox"]
+[ext_resource type="PackedScene" uid="uid://bqn8bed754oux" path="res://assets/nature/glTF/Grass_Large_Extruded.gltf" id="30_kusls"]
+[ext_resource type="PackedScene" uid="uid://wx5ngy37542t" path="res://assets/nature/glTF/Grass_Small.gltf" id="31_5j3uk"]
+[ext_resource type="PackedScene" uid="uid://c766o2uwd44ih" path="res://assets/nature/glTF/MapleTree_1.gltf" id="32_v58h1"]
+[ext_resource type="PackedScene" uid="uid://emhao4717o0t" path="res://assets/nature/glTF/MapleTree_2.gltf" id="33_jb8rd"]
+[ext_resource type="PackedScene" uid="uid://dunbopp77wvpx" path="res://assets/nature/glTF/MapleTree_3.gltf" id="34_mdkbh"]
+[ext_resource type="PackedScene" uid="uid://cjdupmow1v02b" path="res://assets/nature/glTF/MapleTree_4.gltf" id="35_ys7a5"]
+[ext_resource type="PackedScene" uid="uid://dybgfbtdf586g" path="res://assets/nature/glTF/MapleTree_5.gltf" id="36_ad2c5"]
+
+[node name="Tiles" type="Node3D"]
+
+[node name="BirchTree_12" parent="." instance=ExtResource("1_wnauj")]
+
+[node name="BirchTree_22" parent="." instance=ExtResource("2_himyh")]
+
+[node name="BirchTree_32" parent="." instance=ExtResource("3_xoshx")]
+
+[node name="BirchTree_42" parent="." instance=ExtResource("4_6v30c")]
+
+[node name="BirchTree_52" parent="." instance=ExtResource("5_if20i")]
+
+[node name="Bush2" parent="." instance=ExtResource("6_xj681")]
+
+[node name="Bush_Flowers2" parent="." instance=ExtResource("7_lpunb")]
+
+[node name="Bush_Large2" parent="." instance=ExtResource("8_5lw4q")]
+
+[node name="Bush_Large_Flowers2" parent="." instance=ExtResource("9_oeh0g")]
+
+[node name="Bush_Small2" parent="." instance=ExtResource("10_o5xor")]
+
+[node name="Bush_Small_Flowers2" parent="." instance=ExtResource("11_55p22")]
+
+[node name="DeadTree_12" parent="." instance=ExtResource("12_r8nsj")]
+
+[node name="DeadTree_22" parent="." instance=ExtResource("13_3a25u")]
+
+[node name="DeadTree_32" parent="." instance=ExtResource("14_vo78o")]
+
+[node name="DeadTree_42" parent="." instance=ExtResource("15_3gxr6")]
+
+[node name="DeadTree_52" parent="." instance=ExtResource("16_mpw1b")]
+
+[node name="DeadTree_62" parent="." instance=ExtResource("17_gaxg3")]
+
+[node name="DeadTree_72" parent="." instance=ExtResource("18_u5y3f")]
+
+[node name="DeadTree_82" parent="." instance=ExtResource("19_wbdhk")]
+
+[node name="DeadTree_92" parent="." instance=ExtResource("20_vfjr0")]
+
+[node name="DeadTree_102" parent="." instance=ExtResource("21_q3qw6")]
+
+[node name="Flower_12" parent="." instance=ExtResource("22_4634i")]
+
+[node name="Flower_1_Clump2" parent="." instance=ExtResource("23_dhkng")]
+
+[node name="Flower_22" parent="." instance=ExtResource("24_jg5an")]
+
+[node name="Flower_2_Clump2" parent="." instance=ExtResource("25_dundt")]
+
+[node name="Flower_3_Clump2" parent="." instance=ExtResource("26_1ki5f")]
+
+[node name="Flower_4_Clump2" parent="." instance=ExtResource("27_h3my8")]
+
+[node name="Flower_5_Clump2" parent="." instance=ExtResource("28_bdh4i")]
+
+[node name="Grass_Large2" parent="." instance=ExtResource("29_xwkox")]
+
+[node name="Grass_Large_Extruded2" parent="." instance=ExtResource("30_kusls")]
+
+[node name="Grass_Small2" parent="." instance=ExtResource("31_5j3uk")]
+
+[node name="MapleTree_12" parent="." instance=ExtResource("32_v58h1")]
+
+[node name="MapleTree_22" parent="." instance=ExtResource("33_jb8rd")]
+
+[node name="MapleTree_32" parent="." instance=ExtResource("34_mdkbh")]
+
+[node name="MapleTree_42" parent="." instance=ExtResource("35_ys7a5")]
+
+[node name="MapleTree_52" parent="." instance=ExtResource("36_ad2c5")]

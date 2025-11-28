@@ -1,0 +1,88 @@
+[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://b2w1f4ulg4sxf"]
+
+[ext_resource type="Texture2D" uid="uid://bh01vdktavq0o" path="res://Arts/Textures/vfx textures/fireball_trail.png" id="1_8o6xr"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_s04by"]
+expanded_output_ports = [0]
+texture = ExtResource("1_8o6xr")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_clx3k"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_t3luu"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_tgx5g"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(-3, 0)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_8o6xr"]
+expanded_output_ports = [0]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_s04by"]
+operator = 2
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled, ambient_light_disabled, fog_disabled;
+
+uniform sampler2D tex_frg_2 : source_color;
+
+
+
+void fragment() {
+// Input:6
+	vec4 n_out6p0 = COLOR;
+	float n_out6p4 = n_out6p0.a;
+
+
+// Input:4
+	float n_out4p0 = TIME;
+
+
+// VectorOp:5
+	vec2 n_in5p1 = vec2(-3.00000, 0.00000);
+	vec2 n_out5p0 = vec2(n_out4p0) * n_in5p1;
+
+
+// UVFunc:3
+	vec2 n_in3p1 = vec2(1.00000, 1.00000);
+	vec2 n_out3p0 = n_out5p0 * n_in3p1 + UV;
+
+
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, n_out3p0);
+	float n_out2p1 = n_out2p0.r;
+
+
+// FloatOp:7
+	float n_out7p0 = n_out6p4 * n_out2p1;
+
+
+// Output:0
+	ALBEDO = vec3(n_out6p0.xyz);
+	ALPHA = n_out7p0;
+
+
+}
+"
+modes/cull = 2
+flags/unshaded = true
+flags/shadows_disabled = true
+flags/ambient_light_disabled = true
+flags/fog_disabled = true
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_s04by")
+nodes/fragment/2/position = Vector2(-140, 260)
+nodes/fragment/3/node = SubResource("VisualShaderNodeUVFunc_clx3k")
+nodes/fragment/3/position = Vector2(-360, 300)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_t3luu")
+nodes/fragment/4/position = Vector2(-940, 360)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVectorOp_tgx5g")
+nodes/fragment/5/position = Vector2(-580, 280)
+nodes/fragment/6/node = SubResource("VisualShaderNodeInput_8o6xr")
+nodes/fragment/6/position = Vector2(-220, -40)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatOp_s04by")
+nodes/fragment/7/position = Vector2(140, 140)
+nodes/fragment/connections = PackedInt32Array(4, 0, 5, 0, 5, 0, 3, 2, 3, 0, 2, 0, 6, 0, 0, 0, 6, 4, 7, 0, 2, 1, 7, 1, 7, 0, 0, 1)

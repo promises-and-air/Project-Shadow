@@ -1,0 +1,999 @@
+[gd_scene load_steps=57 format=3 uid="uid://oj3blpxqf1bl"]
+
+[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/player scenes/PlayerCharacterScene.tscn" id="1_ntwlr"]
+[ext_resource type="Texture2D" uid="uid://cv0l6qmh4nin2" path="res://Arts/Textures/kenney_prototype_textures/orange/texture_03.png" id="2_mm55q"]
+[ext_resource type="Texture2D" uid="uid://d4knya6w3dpx3" path="res://Arts/Textures/kenney_prototype_textures/dark/texture_09.png" id="3_w0nqe"]
+[ext_resource type="Texture2D" uid="uid://bmixhotjye28k" path="res://Arts/Textures/kenney_prototype_textures/dark/texture_03.png" id="4_qocv4"]
+[ext_resource type="Script" uid="uid://nm1r0occ4iy4" path="res://Scripts/Others/JumppadScript.gd" id="5_4mrtq"]
+[ext_resource type="MeshLibrary" uid="uid://5b1x4sjvlgxj" path="res://assets/nature/nature_tiles.tres" id="6_enr4v"]
+[ext_resource type="PackedScene" uid="uid://evtcxsotyde6" path="res://assets/props/glTF/Workbench.gltf" id="7_nhlve"]
+[ext_resource type="PackedScene" uid="uid://dig5b42hb7hs0" path="res://assets/props/glTF/Stall_Cart_Empty.gltf" id="8_v72l6"]
+[ext_resource type="PackedScene" uid="uid://8rr45j1jauf0" path="res://assets/props/glTF/SmallBottle.gltf" id="9_svfys"]
+[ext_resource type="PackedScene" uid="uid://dn54cd1rf64rw" path="res://assets/props/glTF/Coin_Pile_2.gltf" id="10_kkaxj"]
+[ext_resource type="PackedScene" uid="uid://l0c4y5d7thq0" path="res://assets/props/glTF/Crate_Metal.gltf" id="11_h1vs2"]
+[ext_resource type="PackedScene" uid="uid://4wbocfa425yg" path="res://assets/props/glTF/Crate_Wooden.gltf" id="12_j40wy"]
+[ext_resource type="PackedScene" uid="uid://stenrf8cmawh" path="res://assets/props/glTF/Chest_Wood.gltf" id="13_xta5u"]
+[ext_resource type="PackedScene" uid="uid://dkrmhad3memlb" path="res://assets/props/glTF/Chair_1.gltf" id="14_0wll3"]
+[ext_resource type="PackedScene" uid="uid://wepmp2iabkuy" path="res://assets/props/glTF/Cauldron.gltf" id="15_huuvk"]
+[ext_resource type="PackedScene" uid="uid://b1xor2qt2fqgs" path="res://assets/props/glTF/Candle_1.gltf" id="16_leajk"]
+[ext_resource type="PackedScene" uid="uid://bx80rvuv56d6" path="res://assets/props/glTF/Candle_2.gltf" id="17_5sfao"]
+[ext_resource type="PackedScene" uid="uid://td7fgfiv2foh" path="res://assets/props/glTF/CandleStick_Triple.gltf" id="18_oypgx"]
+[ext_resource type="PackedScene" uid="uid://cwfws2nyysc57" path="res://assets/village/glTF/Prop_Wagon.gltf" id="19_ydfwd"]
+[ext_resource type="PackedScene" uid="uid://bvj0jdxfj31tl" path="res://assets/village/glTF/Prop_WoodenFence_Single.gltf" id="20_d1aem"]
+[ext_resource type="PackedScene" uid="uid://ca2hal58sfoh0" path="res://assets/props/glTF/Lantern_Wall.gltf" id="21_8gtrm"]
+[ext_resource type="PackedScene" uid="uid://bjvul0xyccsu8" path="res://assets/props/glTF/Bag.gltf" id="22_8mr8w"]
+[ext_resource type="PackedScene" uid="uid://clbkp8fxkouim" path="res://assets/props/glTF/Banner_2_Cloth.gltf" id="23_2shpf"]
+[ext_resource type="PackedScene" uid="uid://cy8e4rwfxn2x7" path="res://assets/props/glTF/Barrel_Apples.gltf" id="24_2xsso"]
+[ext_resource type="PackedScene" uid="uid://p2mqghnmmdw2" path="res://assets/props/glTF/Chain_Coil.gltf" id="25_kv08m"]
+[ext_resource type="PackedScene" uid="uid://cha3soxm5gyfl" path="res://assets/props/glTF/WeaponStand.gltf" id="26_ti04t"]
+[ext_resource type="PackedScene" uid="uid://bd87qrva8ena7" path="res://assets/props/glTF/Whetstone.gltf" id="27_w2ds3"]
+[ext_resource type="PackedScene" uid="uid://di20lgb136b3w" path="res://assets/props/glTF/Workbench_Drawers.gltf" id="28_pk5mp"]
+[ext_resource type="PackedScene" uid="uid://1wwu0601lcgg" path="res://Scenes/environment scenes/enemy.tscn" id="29_nvdk4"]
+[ext_resource type="PackedScene" uid="uid://ceunkx4vnd3l7" path="res://assets/village/glTF/Corner_ExteriorWide_Wood.gltf" id="30_kc2b3"]
+[ext_resource type="Shader" uid="uid://dp618riqtqdey" path="res://assets/vfx shaders/s_special_shader.tres" id="31_ur37m"]
+[ext_resource type="Shader" uid="uid://dosw7g2g2u215" path="res://assets/vfx shaders/s_smoke_shader.tres" id="32_gxp3t"]
+[ext_resource type="Shader" uid="uid://bwunnnokcq463" path="res://assets/vfx shaders/s_ember_shader.tres" id="33_1iiyn"]
+[ext_resource type="PackedScene" uid="uid://cl867n1o4mf1k" path="res://assets/props/portal.tscn" id="34_xj4a6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q7axp"]
+load_path = "res://.godot/imported/sky.png-845571cbed12613809cf8abba77042e9.s3tc.ctex"
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fj0np"]
+panorama = SubResource("CompressedTexture2D_q7axp")
+
+[sub_resource type="Sky" id="Sky_8maci"]
+sky_material = SubResource("PanoramaSkyMaterial_fj0np")
+
+[sub_resource type="Environment" id="Environment_pyxgo"]
+sky = SubResource("Sky_8maci")
+tonemap_exposure = 2.18
+glow_enabled = true
+fog_light_color = Color(0.14017183, 0.15623155, 0.18122098, 1)
+fog_light_energy = 0.37
+fog_density = 0.0203
+fog_sky_affect = 0.594
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3yst"]
+albedo_texture = ExtResource("2_mm55q")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fon7x"]
+albedo_texture = ExtResource("3_w0nqe")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_st80m"]
+albedo_texture = ExtResource("3_w0nqe")
+metallic_specular = 0.0
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygjqq"]
+albedo_texture = ExtResource("4_qocv4")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_linps"]
+albedo_texture = ExtResource("4_qocv4")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rd3mg"]
+albedo_color = Color(0.12549, 0.568627, 1, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vm7yl"]
+height = 0.15
+radius = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ep8j"]
+render_priority = 0
+shader = ExtResource("31_ur37m")
+
+[sub_resource type="QuadMesh" id="QuadMesh_nfdyr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7koi"]
+render_priority = 0
+shader = ExtResource("32_gxp3t")
+
+[sub_resource type="Curve" id="Curve_oxko5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.39325845), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pwixt"]
+curve = SubResource("Curve_oxko5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1bvx3"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+angle_min = -119.99999
+angle_max = 90.500015
+angular_velocity_min = -180.75002
+angular_velocity_max = 185.09998
+gravity = Vector3(0, 5, 0)
+damping_min = 1.4950001
+damping_max = 2.19
+scale_min = 0.5
+scale_max = 1.05
+scale_curve = SubResource("CurveTexture_pwixt")
+color = Color(0.22745098, 0, 0.6901961, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_1lc07"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8r3oj"]
+render_priority = 0
+shader = ExtResource("33_1iiyn")
+
+[sub_resource type="Curve" id="Curve_mh3ak"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.39325845), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8wcvr"]
+curve = SubResource("Curve_mh3ak")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v2us3"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+angle_min = -119.99999
+angle_max = 90.500015
+angular_velocity_min = -180.75002
+angular_velocity_max = 185.09998
+gravity = Vector3(0, 5, 0)
+damping_min = 1.4950001
+damping_max = 1.69
+scale_min = 0.01
+scale_max = 0.06
+scale_curve = SubResource("CurveTexture_8wcvr")
+color = Color(0.41535524, 0.7434262, 0.99999994, 1)
+hue_variation_min = -0.100000024
+hue_variation_max = 0.049999975
+
+[node name="TemplateMap" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_pyxgo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.8660235, -0.4330161, 0.25000077, 0, 0.4999982, 0.86602646, -0.50000334, 0.7499992, -0.43301022, -63.22304, 46.873276, 0)
+layers = 31
+light_energy = 1.395
+shadow_enabled = true
+
+[node name="PlayerCharacter" type="Node3D" parent="."]
+
+[node name="PlayerCharacterV2" parent="PlayerCharacter" instance=ExtResource("1_ntwlr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.5544, 1.54036, 0)
+mouse_sense = 0.07
+mantle_max_height = 2.5
+mantle_min_height = 0.5
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="WalkableWalls" type="Node3D" parent="Map"]
+
+[node name="WalkableWall" type="CSGBox3D" parent="Map/WalkableWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9267, 3.94576, 122.859)
+layers = 4
+material_override = SubResource("StandardMaterial3D_h3yst")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(45, 8, 0)
+
+[node name="WalkableWall4" type="CSGBox3D" parent="Map/WalkableWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -225.574, 3.94576, 122.859)
+layers = 4
+material_override = SubResource("StandardMaterial3D_h3yst")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(55.356, 8, 0)
+
+[node name="WalkableWall6" type="CSGBox3D" parent="Map/WalkableWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.052, 3.94576, 122.859)
+layers = 4
+material_override = SubResource("StandardMaterial3D_h3yst")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(52.9949, 8, 0)
+
+[node name="WalkableWall5" type="CSGBox3D" parent="Map/WalkableWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -183.596, 3.94576, 110.841)
+layers = 4
+material_override = SubResource("StandardMaterial3D_h3yst")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(57.5216, 8, 0)
+
+[node name="WalkableWall3" type="CSGBox3D" parent="Map/WalkableWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.9646, 3.94576, 122.859)
+layers = 4
+material_override = SubResource("StandardMaterial3D_h3yst")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(24, 8, 0)
+
+[node name="WalkableWall2" type="CSGBox3D" parent="Map/WalkableWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.4088, 3.94576, 116.746)
+layers = 4
+material_override = SubResource("StandardMaterial3D_h3yst")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(24, 8, 0)
+
+[node name="WalkableWall7" type="CSGBox3D" parent="Map/WalkableWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103.134, 3.94576, 114.059)
+layers = 4
+material_override = SubResource("StandardMaterial3D_h3yst")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(34.8449, 8, 0)
+
+[node name="Blocks" type="Node3D" parent="Map"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128.665, -0.5, 23.066)
+layers = 4
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(260, 1, 210)
+material = SubResource("StandardMaterial3D_fon7x")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(0.999956, -0.00940719, 0, 0.00940719, 0.999956, 0, 0, 0, 1, -2.09055, 4.20324, 0.864672)
+layers = 4
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(0.001, 8, 120.154)
+material = SubResource("StandardMaterial3D_st80m")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-4.37114e-08, 0.642788, 0.766044, 0, 0.766044, -0.642788, -1, -2.80971e-08, -3.34849e-08, -163.619, 21.5158, -67.1354)
+layers = 4
+material_override = SubResource("StandardMaterial3D_ygjqq")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(14, 1, 70)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-4.37114e-08, 0.5, 0.866025, 0, 0.866025, -0.5, -1, -2.18557e-08, -3.78552e-08, -130.606, 23.5035, -4.44917)
+layers = 4
+material_override = SubResource("StandardMaterial3D_ygjqq")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(14, 1, 140)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.145, 43.895, -60.14)
+layers = 4
+material_override = SubResource("StandardMaterial3D_ygjqq")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(50, 1, 28)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.97, 58.44, -11.413)
+layers = 4
+material_override = SubResource("StandardMaterial3D_ygjqq")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(50, 1, 28)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -214.465, 19.9437, 1.90478)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(25, 1, 35.7637)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -162.839, 24.2194, 60.1357)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(35.1389, 1, 19.9894)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102.932, 24.2194, 60.1357)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(35.1389, 1, 19.9894)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.53295, 0.80533504, 27.902527)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(10, 4, 10)
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.17762, 6.391674, 30.882877)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(10, 4, 10)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.17762, 11.257219, 48.690628)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(10, 4, 10)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.165108, 17.539103, 61.007515)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(10, 4, 10)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.816, 2.3, -14.332)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(16.975, 0.5, 16.558)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -214.465, 19.9437, -76.0135)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(25, 1, 37.7349)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185.348, 24.7802, -102.014)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(24.9877, 1, 25.8487)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.529, 29.0835, -102.014)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(24.9877, 1, 25.8487)
+
+[node name="Jumppads" type="Node3D" parent="Map"]
+
+[node name="Jumppad" type="CSGCylinder3D" parent="Map/Jumppads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.705, 0, 28.688)
+layers = 4
+material_override = SubResource("StandardMaterial3D_rd3mg")
+use_collision = true
+collision_mask = 2
+radius = 2.0
+height = 0.15
+script = ExtResource("5_4mrtq")
+jumpBoostValue = 22.0
+
+[node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad"]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Jumppads/Jumppad/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0425774, 0)
+shape = SubResource("CylinderShape3D_vm7yl")
+
+[node name="Jumppad3" type="CSGCylinder3D" parent="Map/Jumppads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -220.88, 44.4149, -62.1605)
+layers = 4
+material_override = SubResource("StandardMaterial3D_rd3mg")
+use_collision = true
+collision_mask = 2
+radius = 2.0
+height = 0.15
+script = ExtResource("5_4mrtq")
+jumpBoostValue = 29.0
+
+[node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad3"]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Jumppads/Jumppad3/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0425774, 0)
+shape = SubResource("CylinderShape3D_vm7yl")
+
+[node name="Jumppad2" type="CSGCylinder3D" parent="Map/Jumppads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -203.661, 0, 61.165)
+layers = 4
+material_override = SubResource("StandardMaterial3D_rd3mg")
+use_collision = true
+collision_mask = 2
+radius = 2.0
+height = 0.15
+script = ExtResource("5_4mrtq")
+jumpBoostValue = 34.0
+
+[node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad2"]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Jumppads/Jumppad2/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0425774, 0)
+shape = SubResource("CylinderShape3D_vm7yl")
+
+[node name="Jumppad4" type="CSGCylinder3D" parent="Map/Jumppads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.54, 0, -65.027)
+layers = 4
+material_override = SubResource("StandardMaterial3D_rd3mg")
+use_collision = true
+collision_mask = 2
+radius = 2.0
+height = 0.15
+script = ExtResource("5_4mrtq")
+jumpBoostValue = 34.0
+
+[node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad4"]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Jumppads/Jumppad4/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0425774, 0)
+shape = SubResource("CylinderShape3D_vm7yl")
+
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -83.231674, 0, -5.16529)
+mesh_library = ExtResource("6_enr4v")
+cell_size = Vector3(0.5, 0.5, 0.5)
+cell_scale = 2.17
+data = {
+"cells": PackedInt32Array(86, 15, 1441819, 86, 16, 1441819, 87, 16, 1441819, 88, 17, 1441819, 89, 17, 1441816, 89, 18, 1441819, 90, 18, 1441819, 93, 17, 1441819, 96, 20, 1441818, 96, 19, 1441818, 96, 17, 1441813, 95, 17, 1441818, 92, 19, 655364, 85, 16, 1441816, 83, 15, 1441816, 99, 18, 1441815, 100, 18, 1441815, 95, 19, 1441815, 88, 20, 1441815, 87, 20, 1441814, 85, 17, 1441814, 82, 13, 1441814, 81, 13, 1441814, 81, 11, 1441814, 82, 11, 1441814, 82, 10, 1441814, 82, 9, 1441814, 86, 19, 1441814, 91, 20, 1441813, 93, 19, 1441813, 93, 18, 1441813, 94, 18, 1441813, 97, 17, 1441813, 81, 6, 1441796, 87, 15, 1048579, 81, 65534, 1048577, 76, 14, 1048607, 98, 20, 32, 134, 65518, 3, 129, 65510, 1441795, 133, 65515, 655380, 115, 65500, 655373, 123, 65501, 31, 135, 65528, 1441827, 132, 65524, 1441818, 132, 65520, 1441818, 140, 65518, 1441818, 135, 65525, 1441818, 134, 65510, 1441818, 131, 65509, 1441818, 131, 65512, 1441818, 132, 65518, 1441818, 119, 65500, 1441818, 126, 65501, 1441818, 118, 65495, 1441818, 117, 65501, 1441818, 111, 65498, 1441818, 121, 65498, 1441819, 113, 65498, 1441819, 135, 65516, 1441819, 136, 65520, 1441819, 135, 65506, 1441819, 139, 65514, 1441819, 136, 65522, 23, 134, 65522, 1441816, 137, 65518, 1441816, 134, 65526, 1441816, 140, 65521, 1441816, 133, 65528, 1441816, 134, 65531, 1441816, 141, 65530, 1441816, 136, 65531, 655384, 140, 65527, 1048600, 138, 65533, 1048600, 138, 65526, 1048599, 135, 65515, 1441815, 133, 65521, 655383, 134, 65521, 1048598, 139, 65524, 1048598, 136, 65523, 22, 137, 65516, 22, 136, 65510, 1441814, 119, 65502, 655382, 113, 65500, 1048598, 110, 65500, 22, 113, 65501, 21, 115, 65502, 1441813, 122, 65505, 655381, 119, 65504, 1048597, 125, 65506, 21, 127, 65504, 1441795, 124, 65506, 1441818, 127, 65507, 655386, 130, 65505, 1048602, 118, 65503, 26, 133, 65531, 1048581, 132, 65519, 1048582, 118, 65500, 3, 128, 65496, 1441796, 112, 65493, 655364, 103, 65495, 1048576, 141, 65519, 0, 142, 65530, 1441796, 142, 65509, 655364, 140, 65497, 655362, 131, 65488, 1048578, 141, 65487, 20, 125, 65482, 1441804, 148, 65508, 655373, 147, 65498, 1048590, 139, 65482, 1048610, 118, 65488, 1048610, 106, 65486, 34, 122, 65482, 1441827, 133, 65510, 655392, 75, 65497, 1048608, 67, 65515, 34, 91, 65493, 1441826, 95, 65485, 655391, 84, 65496, 1048595, 67, 65502, 18, 64, 65523, 1441803, 65, 65523, 1441803, 68, 65518, 1441796, 84, 65494, 655364, 74, 65502, 655362, 70, 65527, 1048578, 80, 65495, 1, 65, 65512, 655361, 73, 65507, 655362, 97, 65493, 1048578, 59, 65524, 2, 58, 65515, 1441805, 72, 65493, 655373, 70, 65489, 1048578, 56, 65505, 1441827, 57, 65535, 655393, 96, 65473, 33, 70, 65478, 1441824, 63, 65491, 1441794, 94, 65479, 655362, 77, 65486, 1048579, 78, 65477, 1048577, 59, 65481, 1, 94, 65495, 21, 93, 65492, 1441813, 92, 65489, 655381, 86, 65492, 1048597, 88, 65495, 21, 85, 65498, 1441813, 79, 65500, 655381, 78, 65500, 655381, 76, 65493, 1048597, 78, 65503, 1048597, 70, 65497, 21, 73, 65504, 1441813, 68, 65507, 655381, 70, 65511, 1048597, 71, 65514, 21, 65, 65509, 1441813, 70, 65510, 1048600, 89, 65498, 1048603, 89, 65485, 1048597, 68, 65523, 22, 70, 65530, 1441814, 74, 65534, 1441814, 65, 65534, 655382, 57, 65531, 1048598, 67, 2, 22, 60, 65519, 1441814, 70, 65516, 1441815, 70, 65521, 1048601, 69, 65524, 655383, 65, 65526, 25, 73, 65531, 1048599, 69, 65533, 23, 75, 2, 23, 70, 3, 1441815, 70, 6, 655383, 73, 1, 655383, 81, 65499, 1048600, 77, 65494, 24, 89, 65494, 1441816, 93, 65495, 655384, 85, 65490, 1048600, 80, 65491, 24, 79, 65502, 1441816, 74, 65505, 655384, 64, 65507, 24, 70, 65515, 1441816, 66, 65516, 655384, 91, 65496, 25, 95, 65495, 1441817, 94, 65490, 655385, 93, 65485, 1048601, 87, 65496, 25, 88, 65491, 1441817, 80, 65492, 655385, 75, 65501, 1048601, 71, 65512, 25, 65, 65506, 1441817, 65, 65520, 655385, 69, 65526, 655385, 70, 65529, 1048601, 74, 65530, 25, 71, 65534, 1441817, 66, 65532, 1441818, 66, 65529, 655386, 69, 65531, 1048602, 70, 65509, 26, 90, 65496, 1441818, 81, 65501, 1441819, 86, 65498, 1441819, 78, 65496, 27, 88, 65489, 27, 100, 65493, 655387, 107, 65493, 1048603, 109, 65494, 27, 106, 65489, 1441819, 105, 65495, 655387)
+}
+
+[node name="Props" type="Node3D" parent="."]
+transform = Transform3D(0.9167745, 0, -0.39940518, 0, 1, 0, 0.39940518, 0, 0.9167745, -68.107285, 9.536743e-07, -17.450577)
+
+[node name="Workbench2" parent="Props" instance=ExtResource("7_nhlve")]
+transform = Transform3D(1.5045205, 0, -0.17788534, 0, 1.515, 0, 0.17788534, 0, 1.5045205, 40.477066, 0, -6.5892315)
+
+[node name="Stall_Cart_Empty2" parent="Props" instance=ExtResource("8_v72l6")]
+transform = Transform3D(1.4332721, 0, -0.8274999, 0, 1.655, 0, 0.8274999, 0, 1.4332721, 50, 0, -3)
+
+[node name="SmallBottle2" parent="Props" instance=ExtResource("9_svfys")]
+transform = Transform3D(2.7309778, 0, -0.3228942, 0, 2.75, 0, 0.3228942, 0, 2.7309778, 39.591156, 1.3296739, -7.1190987)
+
+[node name="Coin_Pile_22" parent="Props" instance=ExtResource("10_kkaxj")]
+transform = Transform3D(0.9930828, 0, -0.11741607, 0, 1, 0, 0.11741607, 0, 0.9930828, 40.125565, 1.3376337, -7.115137)
+
+[node name="Crate_Metal2" parent="Props" instance=ExtResource("11_h1vs2")]
+transform = Transform3D(0.7323826, 0, -1.5396886, 0, 1.705, 0, 1.5396886, 0, 0.7323826, 52.564705, 0, -1.2167103)
+
+[node name="Crate_Wooden2" parent="Props" instance=ExtResource("12_j40wy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.281807, 0, 0.5707035)
+
+[node name="Chest_Wood" parent="Props" instance=ExtResource("13_xta5u")]
+transform = Transform3D(0.5467305, 0, -0.83730865, 0, 1, 0, 0.83730865, 0, 0.5467305, 52.49059, 1.4593993, -1.164399)
+
+[node name="Chair_12" parent="Props" instance=ExtResource("14_0wll3")]
+transform = Transform3D(1.364104, 0, 0.64754933, 0, 1.51, 0, -0.64754933, 0, 1.364104, 46.426086, 0, -2.2500687)
+
+[node name="Cauldron2" parent="Props" instance=ExtResource("15_huuvk")]
+transform = Transform3D(0.3656507, 0, 1.8339027, 0, 1.8700002, 0, -1.8339027, 0, 0.3656507, 44.275208, -0.047047973, -1.5053749)
+
+[node name="Candle_12" parent="Props" instance=ExtResource("16_leajk")]
+transform = Transform3D(1.4101776, 0, -0.16673085, 0, 1.4200001, 0, 0.16673085, 0, 1.4101776, 39.937782, 1.3388343, -6.785738)
+
+[node name="Candle_22" parent="Props" instance=ExtResource("17_5sfao")]
+transform = Transform3D(0.9930828, 0, -0.11741607, 0, 1, 0, 0.11741607, 0, 0.9930828, 40.016678, 1.3388593, -6.8675385)
+
+[node name="CandleStick_Triple2" parent="Props" instance=ExtResource("18_oypgx")]
+transform = Transform3D(0.8117984, 0, 0.5839382, 0, 1, 0, -0.5839382, 0, 0.8117984, 39.800156, 1.3367743, -6.9641247)
+
+[node name="Prop_Wagon2" parent="Props" instance=ExtResource("19_ydfwd")]
+transform = Transform3D(1.1055045, 0, 0.6251079, 0, 1.2699999, 0, -0.6251079, 0, 1.1055045, 46.039177, -7.1525574e-07, -2.876667)
+
+[node name="Prop_WoodenFence_Single2" parent="Props" instance=ExtResource("20_d1aem")]
+transform = Transform3D(-0.15634666, 0, 1.416397, 0, 1.425, 0, -1.416397, 0, -0.15634666, 54.45758, -9.536743e-07, 1.21175)
+
+[node name="Prop_WoodenFence_Single3" parent="Props" instance=ExtResource("20_d1aem")]
+transform = Transform3D(-0.576053, 0, 1.3033754, 0, 1.425, 0, -1.3033754, 0, -0.576053, 53.648926, -1.4305115e-06, -1.6669731)
+
+[node name="Prop_WoodenFence_Single4" parent="Props" instance=ExtResource("20_d1aem")]
+transform = Transform3D(-1.1738158, 0, 0.8079485, 0, 1.425, 0, -0.8079485, 0, -1.1738158, 51.76236, -1.4305115e-06, -3.9495888)
+
+[node name="Prop_WoodenFence_Single5" parent="Props" instance=ExtResource("20_d1aem")]
+transform = Transform3D(-1.2621248, 0, 0.6615629, 0, 1.425, 0, -0.6615629, 0, -1.2621248, 49.114815, -2.3841858e-06, -5.4838676)
+
+[node name="Prop_WoodenFence_Single6" parent="Props" instance=ExtResource("20_d1aem")]
+transform = Transform3D(-1.3466091, 0, 0.46612102, 0, 1.425, 0, -0.46612102, 0, -1.3466091, 46.31572, -2.3841858e-06, -6.683279)
+
+[node name="Prop_WoodenFence_Single7" parent="Props" instance=ExtResource("20_d1aem")]
+transform = Transform3D(-1.3723059, 0, 0.38392934, 0, 1.425, 0, -0.38392934, 0, -1.3723059, 43.444412, -2.3841858e-06, -7.5596466)
+
+[node name="Lantern_Wall2" parent="Props" instance=ExtResource("21_8gtrm")]
+transform = Transform3D(0.5288533, 0, 0.84871334, 0, 1, 0, -0.84871334, 0, 0.5288533, 51.01506, 2.7320852, -1.7392979)
+
+[node name="Lantern_Wall3" parent="Props" instance=ExtResource("21_8gtrm")]
+transform = Transform3D(0.85302305, 0, 0.52187324, 0, 1, 0, -0.52187324, 0, 0.85302305, 27.254885, 2.7320852, -0.11917114)
+
+[node name="Bag2" parent="Props" instance=ExtResource("22_8mr8w")]
+transform = Transform3D(1.3532144, 0.12037367, 0.17669502, -0.066398755, 1.3128572, -0.38587207, -0.20322932, 0.37258047, 1.3026056, 44.115143, 0.84167266, -5.656151)
+
+[node name="Banner_2_Cloth2" parent="Props" instance=ExtResource("23_2shpf")]
+transform = Transform3D(0.98890984, 0, 0.1485171, 0, 1, 0, -0.1485171, 0, 0.98890984, 50.46508, -9.536743e-07, 0.36488724)
+
+[node name="Barrel_Apples2" parent="Props" instance=ExtResource("24_2xsso")]
+transform = Transform3D(1.1927414, 0.12803984, 0.4878508, 0, 1.2525772, -0.3287476, -0.5043735, 0.30278835, 1.1536686, 44.808205, 0.71934223, -5.9161186)
+
+[node name="Chain_Coil2" parent="Props" instance=ExtResource("25_kv08m")]
+transform = Transform3D(0.98713523, 0.093176976, 0.12993097, -0.059881307, 0.9689452, -0.23991533, -0.14825058, 0.22904845, 0.9620595, 44.619476, 0.7256994, -4.8900204)
+
+[node name="WeaponStand2" parent="Props" instance=ExtResource("26_ti04t")]
+transform = Transform3D(0.1217654, 0, -0.99255884, 0, 1, 0, 0.99255884, 0, 0.1217654, 53.44845, -9.536743e-07, 1.615346)
+
+[node name="Whetstone2" parent="Props" instance=ExtResource("27_w2ds3")]
+transform = Transform3D(0.27157056, 0, -1.3224032, 0, 1.3500001, 0, 1.3224032, 0, 0.27157056, 37.46624, -9.536743e-07, -6.8072853)
+
+[node name="Workbench_Drawers2" parent="Props" instance=ExtResource("28_pk5mp")]
+transform = Transform3D(0.8746535, 0, -0.4847485, 0, 1, 0, 0.4847485, 0, 0.8746535, 41.127678, 0.45841998, -6.810196)
+
+[node name="Enemy" parent="Props" instance=ExtResource("29_nvdk4")]
+transform = Transform3D(0.8005013, 0, 0.5993311, 0, 1, 0, -0.5993311, 0, 0.8005013, 31.680368, -0.009592533, -5.573427)
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+knockback_friction = 50.0
+
+[node name="Corner_ExteriorWide_Wood2" parent="Props" instance=ExtResource("30_kc2b3")]
+transform = Transform3D(0.46201167, 0, -0.8868738, 0, 1.45, 0, 0.8868738, 0, 0.46201167, 27.177294, -9.536743e-07, -0.24591827)
+
+[node name="VFX" type="Node3D" parent="."]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -83.231674, 0, -5.16529)
+
+[node name="VFX Fire" type="Node3D" parent="VFX"]
+transform = Transform3D(0.08298494, 0, -0.36570275, 0, 0.375, 0, 0.36570275, 0, 0.08298494, 62.68864, 3.1170497, -9.384096)
+
+[node name="Fire" type="CPUParticles3D" parent="VFX/VFX Fire"]
+transform = Transform3D(-0.9913398, 0, -0.13132218, 0, 1, 0, 0.13132218, 0, -0.9913398, -0.09462738, 0, -0.1038475)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire2" type="CPUParticles3D" parent="VFX/VFX Fire"]
+transform = Transform3D(0.088373214, 0, -0.9960879, 0, 1, 0, 0.9960879, 0, 0.088373214, -0.010921478, 0, -0.100011826)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire3" type="CPUParticles3D" parent="VFX/VFX Fire"]
+transform = Transform3D(-0.44422883, 0, 0.89591366, 0, 1, 0, -0.89591366, 0, -0.44422883, -0.10664368, 0, -0.23349667)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Smoke" type="GPUParticles3D" parent="VFX/VFX Fire"]
+material_override = SubResource("ShaderMaterial_x7koi")
+amount = 15
+lifetime = 1.61
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1bvx3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="Ember" type="GPUParticles3D" parent="VFX/VFX Fire"]
+sorting_offset = 1.0
+material_override = SubResource("ShaderMaterial_8r3oj")
+amount = 30
+lifetime = 1.87
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_v2us3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="VFX/VFX Fire"]
+light_color = Color(0, 1.551447, 2.8066084, 1)
+light_energy = 3.195
+light_bake_mode = 1
+omni_range = 14.968685
+
+[node name="VFX Fire7" type="Node3D" parent="VFX"]
+transform = Transform3D(0.08298494, 0, -0.36570275, 0, 0.375, 0, 0.36570275, 0, 0.08298494, 38.67651, 3.1170497, -11.110513)
+
+[node name="Fire" type="CPUParticles3D" parent="VFX/VFX Fire7"]
+transform = Transform3D(-0.9913398, 0, -0.13132218, 0, 1, 0, 0.13132218, 0, -0.9913398, -0.09462738, 0, -0.1038475)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire2" type="CPUParticles3D" parent="VFX/VFX Fire7"]
+transform = Transform3D(0.088373214, 0, -0.9960879, 0, 1, 0, 0.9960879, 0, 0.088373214, -0.010921478, 0, -0.100011826)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire3" type="CPUParticles3D" parent="VFX/VFX Fire7"]
+transform = Transform3D(-0.44422883, 0, 0.89591366, 0, 1, 0, -0.89591366, 0, -0.44422883, -0.10664368, 0, -0.23349667)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Smoke" type="GPUParticles3D" parent="VFX/VFX Fire7"]
+material_override = SubResource("ShaderMaterial_x7koi")
+amount = 15
+lifetime = 1.61
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1bvx3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="Ember" type="GPUParticles3D" parent="VFX/VFX Fire7"]
+sorting_offset = 1.0
+material_override = SubResource("ShaderMaterial_8r3oj")
+amount = 30
+lifetime = 1.87
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_v2us3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="VFX/VFX Fire7"]
+light_color = Color(0, 1.551447, 2.8066084, 1)
+light_energy = 3.195
+light_bake_mode = 1
+omni_range = 22.126938
+
+[node name="VFX Fire2" type="Node3D" parent="VFX"]
+transform = Transform3D(0.012171124, 0, -0.053636402, 0, 0.055, 0, 0.053636402, 0, 0.012171124, 51.925224, 1.5289053, -16.554049)
+
+[node name="Fire" type="CPUParticles3D" parent="VFX/VFX Fire2"]
+transform = Transform3D(-0.9913398, 0, -0.13132218, 0, 1, 0, 0.13132218, 0, -0.9913398, -0.09462738, 0, -0.1038475)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire2" type="CPUParticles3D" parent="VFX/VFX Fire2"]
+transform = Transform3D(0.088373214, 0, -0.9960879, 0, 1, 0, 0.9960879, 0, 0.088373214, -0.010921478, 0, -0.100011826)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire3" type="CPUParticles3D" parent="VFX/VFX Fire2"]
+transform = Transform3D(-0.44422883, 0, 0.89591366, 0, 1, 0, -0.89591366, 0, -0.44422883, -0.10664368, 0, -0.23349667)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Smoke" type="GPUParticles3D" parent="VFX/VFX Fire2"]
+material_override = SubResource("ShaderMaterial_x7koi")
+amount = 15
+lifetime = 1.61
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1bvx3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="Ember" type="GPUParticles3D" parent="VFX/VFX Fire2"]
+sorting_offset = 1.0
+material_override = SubResource("ShaderMaterial_8r3oj")
+amount = 30
+lifetime = 1.87
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_v2us3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="VFX/VFX Fire2"]
+transform = Transform3D(18.18182, 0, -2.1457672e-06, 0, 18.181818, 0, 2.1457672e-06, 0, 18.18182, -0.07824707, -0.23867607, -0.06915283)
+light_color = Color(2.8066084, 1.859919, 0, 1)
+light_energy = 0.03
+light_volumetric_fog_energy = 1.11
+light_bake_mode = 1
+
+[node name="VFX Fire3" type="Node3D" parent="VFX"]
+transform = Transform3D(0.012171124, 0, -0.053636402, 0, 0.055, 0, 0.053636402, 0, 0.012171124, 52.01428, 1.5951394, -16.630268)
+
+[node name="Fire" type="CPUParticles3D" parent="VFX/VFX Fire3"]
+transform = Transform3D(-0.9913398, 0, -0.13132218, 0, 1, 0, 0.13132218, 0, -0.9913398, -0.09462738, 0, -0.1038475)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire2" type="CPUParticles3D" parent="VFX/VFX Fire3"]
+transform = Transform3D(0.088373214, 0, -0.9960879, 0, 1, 0, 0.9960879, 0, 0.088373214, -0.010921478, 0, -0.100011826)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire3" type="CPUParticles3D" parent="VFX/VFX Fire3"]
+transform = Transform3D(-0.44422883, 0, 0.89591366, 0, 1, 0, -0.89591366, 0, -0.44422883, -0.10664368, 0, -0.23349667)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Smoke" type="GPUParticles3D" parent="VFX/VFX Fire3"]
+material_override = SubResource("ShaderMaterial_x7koi")
+amount = 15
+lifetime = 1.61
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1bvx3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="Ember" type="GPUParticles3D" parent="VFX/VFX Fire3"]
+sorting_offset = 1.0
+material_override = SubResource("ShaderMaterial_8r3oj")
+amount = 30
+lifetime = 1.87
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_v2us3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="VFX/VFX Fire3"]
+transform = Transform3D(18.18182, 0, -2.1457672e-06, 0, 18.181818, 0, 2.1457672e-06, 0, 18.18182, -0.07824707, -0.23867607, -0.06915283)
+light_color = Color(2.8066084, 1.859919, 0, 1)
+light_energy = 0.03
+light_volumetric_fog_energy = 1.11
+light_bake_mode = 1
+
+[node name="VFX Fire4" type="Node3D" parent="VFX"]
+transform = Transform3D(0.012171124, 0, -0.053636402, 0, 0.055, 0, 0.053636402, 0, 0.012171124, 51.968197, 1.6897764, -16.826935)
+
+[node name="Fire" type="CPUParticles3D" parent="VFX/VFX Fire4"]
+transform = Transform3D(-0.9913398, 0, -0.13132218, 0, 1, 0, 0.13132218, 0, -0.9913398, -0.09462738, 0, -0.1038475)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire2" type="CPUParticles3D" parent="VFX/VFX Fire4"]
+transform = Transform3D(0.088373214, 0, -0.9960879, 0, 1, 0, 0.9960879, 0, 0.088373214, -0.010921478, 0, -0.100011826)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire3" type="CPUParticles3D" parent="VFX/VFX Fire4"]
+transform = Transform3D(-0.44422883, 0, 0.89591366, 0, 1, 0, -0.89591366, 0, -0.44422883, -0.10664368, 0, -0.23349667)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Smoke" type="GPUParticles3D" parent="VFX/VFX Fire4"]
+material_override = SubResource("ShaderMaterial_x7koi")
+amount = 15
+lifetime = 1.61
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1bvx3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="Ember" type="GPUParticles3D" parent="VFX/VFX Fire4"]
+sorting_offset = 1.0
+material_override = SubResource("ShaderMaterial_8r3oj")
+amount = 30
+lifetime = 1.87
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_v2us3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="VFX/VFX Fire4"]
+transform = Transform3D(18.18182, 0, -2.1457672e-06, 0, 18.181818, 0, 2.1457672e-06, 0, 18.18182, -0.07824707, -0.23867607, -0.06915283)
+light_color = Color(2.8066084, 1.859919, 0, 1)
+light_energy = 0.04
+light_volumetric_fog_energy = 1.11
+light_bake_mode = 1
+
+[node name="VFX Fire5" type="Node3D" parent="VFX"]
+transform = Transform3D(0.012171124, 0, -0.053636402, 0, 0.055, 0, 0.053636402, 0, 0.012171124, 51.81834, 1.8070025, -16.754606)
+
+[node name="Fire" type="CPUParticles3D" parent="VFX/VFX Fire5"]
+transform = Transform3D(-0.9913398, 0, -0.13132218, 0, 1, 0, 0.13132218, 0, -0.9913398, -0.09462738, 0, -0.1038475)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire2" type="CPUParticles3D" parent="VFX/VFX Fire5"]
+transform = Transform3D(0.088373214, 0, -0.9960879, 0, 1, 0, 0.9960879, 0, 0.088373214, -0.010921478, 0, -0.100011826)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire3" type="CPUParticles3D" parent="VFX/VFX Fire5"]
+transform = Transform3D(-0.44422883, 0, 0.89591366, 0, 1, 0, -0.89591366, 0, -0.44422883, -0.10664368, 0, -0.23349667)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Smoke" type="GPUParticles3D" parent="VFX/VFX Fire5"]
+material_override = SubResource("ShaderMaterial_x7koi")
+amount = 15
+lifetime = 1.61
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1bvx3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="Ember" type="GPUParticles3D" parent="VFX/VFX Fire5"]
+sorting_offset = 1.0
+material_override = SubResource("ShaderMaterial_8r3oj")
+amount = 30
+lifetime = 1.87
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_v2us3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="VFX/VFX Fire5"]
+transform = Transform3D(18.18182, 0, -2.1457672e-06, 0, 18.181818, 0, 2.1457672e-06, 0, 18.18182, -0.07824707, -0.23867607, -0.06915283)
+light_color = Color(2.8066084, 1.859919, 0, 1)
+light_energy = 0.04
+light_volumetric_fog_energy = 1.11
+light_bake_mode = 1
+
+[node name="VFX Fire6" type="Node3D" parent="VFX"]
+transform = Transform3D(0.012171124, 0, -0.053636402, 0, 0.055, 0, 0.053636402, 0, 0.012171124, 51.66273, 1.6831576, -16.682)
+
+[node name="Fire" type="CPUParticles3D" parent="VFX/VFX Fire6"]
+transform = Transform3D(-0.9913398, 0, -0.13132218, 0, 1, 0, 0.13132218, 0, -0.9913398, -0.09462738, 0, -0.1038475)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire2" type="CPUParticles3D" parent="VFX/VFX Fire6"]
+transform = Transform3D(0.088373214, 0, -0.9960879, 0, 1, 0, 0.9960879, 0, 0.088373214, -0.010921478, 0, -0.100011826)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Fire3" type="CPUParticles3D" parent="VFX/VFX Fire6"]
+transform = Transform3D(-0.44422883, 0, 0.89591366, 0, 1, 0, -0.89591366, 0, -0.44422883, -0.10664368, 0, -0.23349667)
+sorting_offset = 2.0
+material_override = SubResource("ShaderMaterial_5ep8j")
+amount = 1
+local_coords = true
+mesh = SubResource("QuadMesh_nfdyr")
+gravity = Vector3(0, 0, 0)
+
+[node name="Smoke" type="GPUParticles3D" parent="VFX/VFX Fire6"]
+material_override = SubResource("ShaderMaterial_x7koi")
+amount = 15
+lifetime = 1.61
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1bvx3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="Ember" type="GPUParticles3D" parent="VFX/VFX Fire6"]
+sorting_offset = 1.0
+material_override = SubResource("ShaderMaterial_8r3oj")
+amount = 30
+lifetime = 1.87
+randomness = 0.1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_v2us3")
+draw_pass_1 = SubResource("QuadMesh_1lc07")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="VFX/VFX Fire6"]
+transform = Transform3D(18.18182, 0, -2.1457672e-06, 0, 18.181818, 0, 2.1457672e-06, 0, 18.18182, -0.07824707, -0.23867607, -0.06915283)
+light_color = Color(2.8066084, 1.859919, 0, 1)
+light_energy = 0.04
+light_volumetric_fog_energy = 1.11
+light_bake_mode = 1
+
+[node name="Portal" parent="VFX" instance=ExtResource("34_xj4a6")]
+transform = Transform3D(0.13892134, 0.60423577, 2.6411984e-08, 0, -2.7101061e-08, 0.62, 0.60423577, -0.13892134, -6.0724443e-09, 55.411568, 1.2239119, -10.684309)
+
+[node name="OmniLight3D" parent="VFX/Portal" index="2"]
+light_color = Color(2.0325725, 0, 0, 1)
+light_energy = 4.453
+omni_range = 3.9684148
+
+[connection signal="body_entered" from="Map/Jumppads/Jumppad/Area3D" to="Map/Jumppads/Jumppad" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Map/Jumppads/Jumppad3/Area3D" to="Map/Jumppads/Jumppad3" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Map/Jumppads/Jumppad2/Area3D" to="Map/Jumppads/Jumppad2" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Map/Jumppads/Jumppad4/Area3D" to="Map/Jumppads/Jumppad4" method="_on_area_3d_body_entered"]
+
+[editable path="VFX/Portal"]

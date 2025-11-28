@@ -1,0 +1,111 @@
+[gd_resource type="VisualShader" load_steps=10 format=3 uid="uid://273hhcemces"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_175js"]
+parameter_name = "AuraTexture"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3fgsj"]
+expanded_output_ports = [0]
+source = 5
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_ho6vp"]
+parameter_name = "AuraColor"
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_ci222"]
+parameter_name = "AuraIntensity"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_c30ae"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_apyox"]
+default_input_values = [1, Vector2(1, 1), 2, Vector2(0, 0.39)]
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_hxgxs"]
+parameter_name = "Speed"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_pykn1"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_488e4"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+operator = 2
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded;
+
+uniform vec4 AuraColor : source_color;
+uniform float AuraIntensity;
+uniform vec2 Speed;
+uniform sampler2D AuraTexture : source_color;
+
+
+
+void fragment() {
+// ColorParameter:3
+	vec4 n_out3p0 = AuraColor;
+
+
+// FloatParameter:4
+	float n_out4p0 = AuraIntensity;
+
+
+// VectorOp:5
+	vec4 n_out5p0 = n_out3p0 * vec4(n_out4p0);
+
+
+// Input:8
+	float n_out8p0 = TIME;
+
+
+// Vector2Parameter:7
+	vec2 n_out7p0 = Speed;
+
+
+// VectorOp:9
+	vec2 n_out9p0 = vec2(n_out8p0) * n_out7p0;
+
+
+// UVFunc:6
+	vec2 n_in6p1 = vec2(1.00000, 1.00000);
+	vec2 n_out6p0 = n_out9p0 * n_in6p1 + UV;
+
+
+	vec4 n_out11p0;
+// Texture2D:11
+	n_out11p0 = texture(AuraTexture, n_out6p0);
+	float n_out11p1 = n_out11p0.r;
+
+
+// Output:0
+	ALBEDO = vec3(n_out5p0.xyz);
+	ALPHA = n_out11p1;
+
+
+}
+"
+flags/unshaded = true
+nodes/fragment/0/position = Vector2(1060, 140)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_ho6vp")
+nodes/fragment/3/position = Vector2(400, 60)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatParameter_ci222")
+nodes/fragment/4/position = Vector2(380, 260)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVectorOp_c30ae")
+nodes/fragment/5/position = Vector2(740, 0)
+nodes/fragment/6/node = SubResource("VisualShaderNodeUVFunc_apyox")
+nodes/fragment/6/position = Vector2(-200, 300)
+nodes/fragment/7/node = SubResource("VisualShaderNodeVec2Parameter_hxgxs")
+nodes/fragment/7/position = Vector2(-820, 380)
+nodes/fragment/8/node = SubResource("VisualShaderNodeInput_pykn1")
+nodes/fragment/8/position = Vector2(-861.9586, 213.89977)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVectorOp_488e4")
+nodes/fragment/9/position = Vector2(-527.5587, 276.06384)
+nodes/fragment/10/node = SubResource("VisualShaderNodeTexture2DParameter_175js")
+nodes/fragment/10/position = Vector2(60, 180)
+nodes/fragment/11/node = SubResource("VisualShaderNodeTexture_3fgsj")
+nodes/fragment/11/position = Vector2(398.47183, 550.4433)
+nodes/fragment/connections = PackedInt32Array(3, 0, 5, 0, 4, 0, 5, 1, 5, 0, 0, 0, 8, 0, 9, 0, 7, 0, 9, 1, 9, 0, 6, 2, 10, 0, 11, 2, 6, 0, 11, 0, 11, 1, 0, 1)

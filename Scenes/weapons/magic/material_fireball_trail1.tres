@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://qwwtkodnexli"]
+
+[ext_resource type="Shader" uid="uid://b2w1f4ulg4sxf" path="res://assets/vfx shaders/trail_fireball.tres" id="1_q5ilc"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_q5ilc")

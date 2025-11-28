@@ -1,0 +1,30 @@
+# Godot
+.godot/
+.import/
+*.import
+*.translation
+export_presets.cfg
+
+# Mono (если используешь C#)
+.mono/
+data_*/
+mono_crash.*.json
+
+# System/tool-specific files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Build
+builds/
+*.exe
+*.pck
+*.zip
+*.apk
+*.dmg

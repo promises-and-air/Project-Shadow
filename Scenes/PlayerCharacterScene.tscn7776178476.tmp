@@ -1,0 +1,426 @@
+[gd_scene load_steps=41 format=3 uid="uid://bwggrf7sbmkcv"]
+
+[ext_resource type="Script" uid="uid://ca7gowohpmsx4" path="res://Scripts/PlayerCharacter/QuakelikeController/playerMovement.gd" id="1_3aho1"]
+[ext_resource type="Curve" uid="uid://cfrywcgb3icf7" path="res://Scripts/PlayerCharacter/QuakelikeController/45degreecurve.tres" id="2_4qff7"]
+[ext_resource type="Curve" uid="uid://bnx0beailqv82" path="res://Scripts/PlayerCharacter/QuakelikeController/slideDragCurve.tres" id="3_chq6j"]
+[ext_resource type="Curve" uid="uid://d3pljhh44al2d" path="res://Scripts/PlayerCharacter/QuakelikeController/slopeAngleCurve.tres" id="4_rvq41"]
+[ext_resource type="Curve" uid="uid://b54ldf6ddcg4p" path="res://Scripts/PlayerCharacter/QuakelikeController/wallRunCurve.tres" id="5_ydctx"]
+[ext_resource type="Script" uid="uid://bq5krjnl8sobg" path="res://Scripts/PlayerCharacter/QuakelikeController/playerCamera.gd" id="6_0agbx"]
+[ext_resource type="Resource" uid="uid://df87vs52wxjrn" path="res://Scripts/PlayerCharacter/QuakelikeController/jumpAnim.tres" id="7_0xfjf"]
+[ext_resource type="Resource" uid="uid://cb3q3oq5pi16x" path="res://Scripts/PlayerCharacter/QuakelikeController/landAnim.tres" id="8_kdof8"]
+[ext_resource type="Resource" uid="uid://ciyb54t241ip8" path="res://Scripts/PlayerCharacter/QuakelikeController/landRot.tres" id="9_msp70"]
+[ext_resource type="Resource" uid="uid://b0t6fapfb6cnx" path="res://Scripts/PlayerCharacter/QuakelikeController/slideAnim.tres" id="10_43gd7"]
+[ext_resource type="Resource" uid="uid://c77roo24tjr7n" path="res://Scripts/PlayerCharacter/QuakelikeController/wallRunAnim.tres" id="11_do0ij"]
+[ext_resource type="PackedScene" uid="uid://c2gc2gd8uieuy" path="res://Scripts/PlayerCharacter/QuakelikeController/rope.tscn" id="12_vs6b3"]
+[ext_resource type="Script" uid="uid://cah1ar152objn" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="13_4hp3t"]
+[ext_resource type="PackedScene" uid="uid://crm0oehiwfse0" path="res://Scenes/viewmodel_camera.tscn" id="13_4qff7"]
+[ext_resource type="Script" uid="uid://dagj6q680feiv" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="14_hk0st"]
+[ext_resource type="Script" uid="uid://cag7686hpmjtv" path="res://addons/shaker/data/Vector3/ShakerTypeNoiseShake3D.gd" id="15_1rskr"]
+[ext_resource type="Script" uid="uid://c6p8i70e7v4r4" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="16_touoi"]
+[ext_resource type="Script" uid="uid://cqqllsd47fdx5" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="17_thytq"]
+[ext_resource type="Script" uid="uid://b1drv2x10t4bn" path="res://Scripts/PlayerCharacter/QuakelikeController/grappleHook.gd" id="18_4hp3t"]
+[ext_resource type="Curve" uid="uid://vahpdtrhcd6d" path="res://Scripts/PlayerCharacter/QuakelikeController/grappleCurve.tres" id="19_hk0st"]
+[ext_resource type="Script" uid="uid://bmmijndfi05r7" path="res://Scripts/PlayerCharacter/QuakelikeController/ProceduralCurve.gd" id="20_1rskr"]
+[ext_resource type="Script" uid="uid://lo0iiie2lcyc" path="res://Scenes/canvas_layer.gd" id="22_chq6j"]
+[ext_resource type="Script" uid="uid://cr4dyif2fsp2w" path="res://Scripts/state_machine/state_machine.gd" id="23_43gd7"]
+[ext_resource type="Script" uid="uid://xgn83r6iu4wc" path="res://Scripts/state_machine/states/ground_state.gd" id="24_do0ij"]
+[ext_resource type="Script" uid="uid://ca0aqr7faq1yf" path="res://Scripts/ComboVisualFeedback.gd" id="24_vs6b3"]
+[ext_resource type="Script" uid="uid://c5fft16wi787u" path="res://Scripts/state_machine/states/air_state.gd" id="25_vs6b3"]
+[ext_resource type="Script" uid="uid://bvrq8nqjles4" path="res://Scripts/state_machine/states/dash_state.gd" id="26_4hp3t"]
+[ext_resource type="Script" uid="uid://c3hrcrnw6ny18" path="res://Scripts/state_machine/states/mantle_state.gd" id="27_hk0st"]
+[ext_resource type="Script" uid="uid://d25lflodvj2j4" path="res://Scripts/state_machine/states/slide_state.gd" id="28_1rskr"]
+
+[sub_resource type="Curve" id="Curve_msp70"]
+_data = [Vector2(0, 0), 0.0, 5.7716537, 0, 0, Vector2(0.3003195, 1), 0.93746656, 0.0, 0, 0, Vector2(0.6932907, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hwg68"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_mj65v"]
+noise = SubResource("FastNoiseLite_hwg68")
+
+[sub_resource type="Resource" id="Resource_3as0d"]
+script = ExtResource("15_1rskr")
+noise_texture = SubResource("NoiseTexture3D_mj65v")
+amplitude = Vector3(0.01, 0, 0.01)
+
+[sub_resource type="Resource" id="Resource_0qhj7"]
+script = ExtResource("16_touoi")
+RotationShake = Array[ExtResource("14_hk0st")]([SubResource("Resource_3as0d")])
+
+[sub_resource type="Resource" id="Resource_jq34v"]
+script = ExtResource("17_thytq")
+frequency = Vector3(2, 3, 1)
+phase = Vector3(0, 0, 0)
+amplitude = Vector3(0.01, 0.1, 0)
+
+[sub_resource type="Resource" id="Resource_gc7ew"]
+script = ExtResource("16_touoi")
+PositionShake = Array[ExtResource("14_hk0st")]([SubResource("Resource_jq34v")])
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_v7r3x"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_apj3w"]
+height = 0.95
+radius = 0.45
+
+[sub_resource type="Resource" id="Resource_2e838"]
+script = ExtResource("20_1rskr")
+curve = ExtResource("19_hk0st")
+length = 0.8
+
+[sub_resource type="GDScript" id="GDScript_43gd7"]
+script/source = "extends State
+class_name AttackState
+
+# ========== COMBO SETTINGS ==========
+const MAX_COMBO: int = 3
+const COMBO_WINDOW: float = 0.6
+
+const DAMAGES := {
+	1: 25.0,
+	2: 40.0,
+	3: 60.0
+}
+
+# ========== STATE VARIABLES ==========
+var combo_count: int = 0
+var combo_timer: float = 0.0
+var attack_queued: bool = false
+
+var procedural_attack: ProceduralAttack
+var attack_duration: float = 0.0
+var max_attack_time: float = 0.0
+
+
+func initialize(player_ref: PlayerMovement) -> void:
+	super.initialize(player_ref)
+	
+	# ========== УНИВЕРСАЛЬНЫЙ ПОИСК ==========
+	procedural_attack = _find_procedural_attack(player)
+	
+	if procedural_attack:
+		print(\"✓ ProceduralAttack найден\")
+	else:
+		push_warning(\"ProceduralAttack не найден в дереве сцены\")
+
+func _find_procedural_attack(root: Node) -> ProceduralAttack:
+	\"\"\"Рекурсивный поиск ProceduralAttack в дереве\"\"\"
+	for child in root.get_children():
+		if child is ProceduralAttack:
+			return child
+		var result = _find_procedural_attack(child)
+		if result:
+			return result
+	return null
+
+func enter(_msg: Dictionary = {}) -> void:
+	# ========== ПРОВЕРКА: ТОЛЬКО ДЛЯ МЕЧА ==========
+	if not player.current_weapon or not player.current_weapon.name.contains(\"Sword\"):
+		print(\"⚠️ Атака доступна только с мечом\")
+		return
+	
+	if not procedural_attack:
+		print(\"❌ ProceduralAttack не найден\")
+		return
+	
+	# Увеличить комбо
+	combo_count += 1
+	if combo_count > MAX_COMBO:
+		combo_count = 1
+	
+	player.is_attacking = true
+	
+	# Запустить процедурную атаку
+	var attack_type = _get_attack_type()
+	procedural_attack.play_attack(attack_type)
+	
+	# Получить длительность
+	max_attack_time = procedural_attack.get_attack_duration()
+	attack_duration = 0.0
+	
+	attack_queued = false
+	combo_timer = COMBO_WINDOW
+	
+	# Viewmodel kick
+	if is_instance_valid(player.viewmodel_camera) and player.viewmodel_camera.has_method(\"jump_kick\"):
+		var kick_strength = 0.06 if combo_count == 1 else (0.08 if combo_count == 2 else 0.12)
+		player.viewmodel_camera.jump_kick(kick_strength)
+	
+	print(\"⚔ Attack \", combo_count, \"/\", MAX_COMBO, \" | Damage: \", DAMAGES[combo_count])
+
+
+func exit() -> void:
+	player.is_attacking = false
+
+
+func physics_update(delta: float) -> void:
+	attack_duration += delta
+	
+	if combo_timer > 0:
+		combo_timer -= delta
+		if combo_timer <= 0:
+			combo_count = 0
+	
+	# Легкое торможение
+	var horizontal = Vector3(player.velocity.x, 0, player.velocity.z)
+	horizontal = horizontal.lerp(Vector3.ZERO, delta * 3.0)
+	player.velocity.x = horizontal.x
+	player.velocity.z = horizontal.z
+	
+	# Гравитация
+	if not player.is_on_floor():
+		player.velocity.y -= player.gravity * delta
+
+
+func check_transitions() -> State:
+	var state_machine = get_parent() as StateMachine
+	if not state_machine:
+		return null
+	
+	# Атака закончилась?
+	if attack_duration >= max_attack_time:
+		if attack_queued and combo_timer > 0 and combo_count < MAX_COMBO:
+			return self
+		else:
+			if player.is_on_floor():
+				return state_machine.states.get(\"groundstate\")
+			else:
+				return state_machine.states.get(\"airstate\")
+	
+	return null
+
+
+func handle_attack_input() -> void:
+	if combo_timer > 0 and combo_count < MAX_COMBO:
+		attack_queued = true
+		print(\"⏱ Attack queued\")
+
+
+func get_current_damage() -> float:
+	return DAMAGES.get(combo_count, 25.0)
+
+
+func _get_attack_type() -> ProceduralAttack.AttackType:
+	match combo_count:
+		1: return ProceduralAttack.AttackType.LIGHT
+		2: return ProceduralAttack.AttackType.MEDIUM
+		3: return ProceduralAttack.AttackType.HEAVY
+		_: return ProceduralAttack.AttackType.LIGHT
+"
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "camera_holder", "collider", "camera", "real_camera", "ceiling_check", "raycast_mantle_lower", "raycast_mantle_upper") groups=["player"]]
+collision_mask = 28
+floor_constant_speed = true
+floor_snap_length = 0.4
+script = ExtResource("1_3aho1")
+air_strafe_curve = ExtResource("2_4qff7")
+slide_drag_curve = ExtResource("3_chq6j")
+slope_angle_drag_curve = ExtResource("4_rvq41")
+wallrun_curve = ExtResource("5_ydctx")
+head = NodePath("Head")
+camera_holder = NodePath("Head/CameraHolder")
+collider = NodePath("CollisionShape3D")
+camera = NodePath("Head/CameraHolder/CameraShaker/Camera")
+real_camera = NodePath("Head/CameraHolder/CameraShaker/Camera")
+ceiling_check = NodePath("CeilingCheck")
+raycast_mantle_lower = NodePath("Head/RayCastMantleLower")
+raycast_mantle_upper = NodePath("Head/RayCastMantleUpper")
+wall_jump_multiplier = 1.2
+wall_jump_momentum_keep = 1.0
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="CameraHolder" type="Node3D" parent="Head"]
+
+[node name="CameraShaker" type="Node3D" parent="Head/CameraHolder"]
+transform = Transform3D(1, 2.98023e-08, -1.49012e-08, -2.98023e-08, 1, 3.72529e-09, 1.49012e-08, -3.72529e-09, 1, 3.16795e-08, -5.95464e-08, -5.96046e-08)
+
+[node name="Camera" type="Camera3D" parent="Head/CameraHolder/CameraShaker" node_paths=PackedStringArray("player")]
+cull_mask = 1048572
+fov = 95.0
+script = ExtResource("6_0agbx")
+player = NodePath("../../../..")
+jumpAnimation = ExtResource("7_0xfjf")
+landPosAnimation = ExtResource("8_kdof8")
+landRotAnimation = ExtResource("9_msp70")
+slideAnimation = ExtResource("10_43gd7")
+wallRunAnimation = ExtResource("11_do0ij")
+
+[node name="GrappleRay" type="RayCast3D" parent="Head/CameraHolder/CameraShaker/Camera"]
+target_position = Vector3(0, 0, -20)
+collision_mask = 28
+
+[node name="Rope" parent="Head/CameraHolder/CameraShaker/Camera" instance=ExtResource("12_vs6b3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.799999, -0.400002)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Head/CameraHolder/CameraShaker/Camera"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="viewmodel_camera" parent="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport" instance=ExtResource("13_4qff7")]
+cull_mask = 2
+bob_vertical_intensity = 0.04
+bob_horizontal_intensity = 0.03
+bob_speed = 10.0
+walk_tilt_amount = 0.12
+walk_roll_amount = 0.03
+walk_sway_amount = 0.015
+slide_tilt_amount = 0.12
+slide_roll_amount = 0.08
+slide_lower_amount = 0.08
+crouch_tilt_amount = 0.06
+crouch_roll_amount = 0.03
+crouch_lower_amount = 0.06
+crouch_center_amount = 0.04
+dash_tilt_back = 0.1
+dash_zoom_time = 0.2
+dash_return_time = 1.0
+mantle_animation_curve = SubResource("Curve_msp70")
+
+[node name="Skeleton3D" parent="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/Hands" index="0"]
+bones/0/rotation = Quaternion(-0.26236045, -0.41010198, 0.8281781, -0.2776769)
+bones/1/rotation = Quaternion(0.44214645, -0.5399457, 0.45376316, 0.55413383)
+bones/2/rotation = Quaternion(0.106858075, -0.037156608, 0.11800471, 0.9865474)
+bones/3/rotation = Quaternion(0.049023, -0.013701551, -0.26789546, 0.9621025)
+bones/4/rotation = Quaternion(-0.0022882256, -0.021587374, -0.22327311, 0.9745142)
+bones/5/rotation = Quaternion(-0.017975396, -0.017555052, -0.23152888, 0.9725036)
+bones/6/rotation = Quaternion(-7.894637e-08, -2.1413418e-07, -0.28332034, 0.9590253)
+bones/9/rotation = Quaternion(-0.15906094, -0.04456594, -0.34564108, 0.9237131)
+bones/12/rotation = Quaternion(-0.1120299, 0.021890745, -0.33472863, 0.93537533)
+bones/15/rotation = Quaternion(0.40520543, 0.5546063, 0.012338515, 0.7266831)
+bones/16/rotation = Quaternion(-0.0021287093, 0.033377234, -0.30049646, 0.9531964)
+bones/17/rotation = Quaternion(0.24931246, 0.96826166, -0.016337018, -0.0067735286)
+bones/19/position = Vector3(15.589779, -5.4990225, -9.370212)
+bones/19/rotation = Quaternion(-0.002881053, 0.4980033, 0.52851385, -0.6875009)
+bones/21/position = Vector3(16.151377, -5.4932823, 10.32595)
+bones/21/rotation = Quaternion(0.6249288, 0.5113532, 0.051148836, -0.5876785)
+bones/23/rotation = Quaternion(0.2526215, 0.41604233, 0.8259736, -0.28435695)
+bones/24/rotation = Quaternion(0.43001238, -0.56393933, 0.42749265, 0.5606352)
+bones/26/rotation = Quaternion(0.12560359, 0.20024301, 0.053682096, 0.97017777)
+bones/27/rotation = Quaternion(0.066117674, -0.06273792, 0.30365136, 0.94841355)
+bones/28/rotation = Quaternion(0.03677027, -0.008134993, 0.21464513, 0.97596586)
+bones/30/rotation = Quaternion(-0.0020503553, -0.0023245402, 0.28546843, 0.9583831)
+bones/31/rotation = Quaternion(-0.0012925337, 0.0015100258, 0.48888955, 0.8723435)
+bones/32/rotation = Quaternion(2.3900651e-05, 0.001751676, 0.21453655, 0.97671443)
+bones/33/rotation = Quaternion(-0.15527038, 0.114049695, 0.3158119, 0.9290568)
+bones/34/rotation = Quaternion(-0.056118667, -0.01721954, 0.369006, 0.9275715)
+bones/35/rotation = Quaternion(-0.0053526447, 0.012903502, 0.33460256, 0.9422559)
+bones/36/rotation = Quaternion(-0.14924937, 0.016832868, 0.35289598, 0.923529)
+bones/37/rotation = Quaternion(0.050469253, -0.0078099724, 0.30627045, 0.9505737)
+bones/38/rotation = Quaternion(-0.0039978074, 0.040278923, 0.40489537, 0.91346675)
+bones/39/rotation = Quaternion(0.013702392, 0.6723089, 0.3816681, 0.6341471)
+bones/40/rotation = Quaternion(-0.024562282, 0.05641412, -0.30067882, 0.9517386)
+bones/41/rotation = Quaternion(0.2446442, 0.96933323, 0.02225174, -0.006878393)
+
+[node name="ShakerComponent3D" type="Node3D" parent="Head/CameraHolder/CameraShaker"]
+script = ExtResource("13_4hp3t")
+AutoPlay = true
+shakerPreset = SubResource("Resource_0qhj7")
+
+[node name="ShakerComponent3D2" type="Node3D" parent="Head/CameraHolder/CameraShaker"]
+script = ExtResource("13_4hp3t")
+AutoPlay = true
+shakerPreset = SubResource("Resource_gc7ew")
+
+[node name="RayCastMantleLower" type="RayCast3D" parent="Head"]
+exclude_parent = false
+target_position = Vector3(0, 0, -2)
+collision_mask = 28
+
+[node name="RayCastMantleUpper" type="RayCast3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+exclude_parent = false
+target_position = Vector3(0, 0, -2)
+collision_mask = 28
+
+[node name="RayCastLedgeCheck" type="RayCast3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+enabled = false
+collision_mask = 28
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_v7r3x")
+
+[node name="CeilingCheck" type="ShapeCast3D" parent="."]
+shape = SubResource("CylinderShape3D_apj3w")
+target_position = Vector3(0, 0.5, 0)
+
+[node name="GrappleHook" type="Node" parent="." node_paths=PackedStringArray("ray", "rope")]
+script = ExtResource("18_4hp3t")
+ray = NodePath("../Head/CameraHolder/CameraShaker/Camera/GrappleRay")
+minRestFraction = 0.2
+restLengthCurve = SubResource("Resource_2e838")
+rope = NodePath("../Head/CameraHolder/CameraShaker/Camera/Rope")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("22_chq6j")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpeedLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 25.0
+offset_right = 84.0
+offset_bottom = 48.0
+text = "Speed: 0.0"
+
+[node name="AnimLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 65.0
+offset_right = 85.0
+offset_bottom = 88.0
+text = "Now playing:"
+
+[node name="ComboFeedback" type="ColorRect" parent="CanvasLayer/Control"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("24_vs6b3")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("23_43gd7")
+initial_state = NodePath("AirState")
+debug_transitions = true
+
+[node name="GroundState" type="Node" parent="StateMachine"]
+script = ExtResource("24_do0ij")
+
+[node name="AirState" type="Node" parent="StateMachine"]
+script = ExtResource("25_vs6b3")
+
+[node name="DashState" type="Node" parent="StateMachine"]
+script = ExtResource("26_4hp3t")
+
+[node name="MantleState" type="Node" parent="StateMachine"]
+script = ExtResource("27_hk0st")
+
+[node name="SlideState" type="Node" parent="StateMachine"]
+script = ExtResource("28_1rskr")
+
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = SubResource("GDScript_43gd7")
+
+[editable path="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera"]

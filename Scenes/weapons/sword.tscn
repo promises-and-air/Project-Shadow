@@ -1,0 +1,138 @@
+[gd_scene load_steps=20 format=3 uid="uid://bgb6b5we1hs4f"]
+
+[ext_resource type="PackedScene" uid="uid://2bsoxqqfp7ad" path="res://assets/weapons/sword1/Sword_1.glb" id="1_0rw7n"]
+[ext_resource type="Shader" uid="uid://273hhcemces" path="res://assets/vfx shaders/aura_shader.tres" id="2_8eqvy"]
+[ext_resource type="Material" uid="uid://ccgokfo2yesnp" path="res://assets/weapons/sword1/sword1_shader.tres" id="2_chkhu"]
+[ext_resource type="Texture2D" uid="uid://ub0b55mr7uh8" path="res://Arts/Textures/vfx textures/T_PerlinNoise_Tiled.png" id="3_5sndr"]
+[ext_resource type="Texture2D" uid="uid://dcyfluaketeji" path="res://Arts/Textures/vfx textures/T_fire_flipbook4_sm.png" id="5_x1htr"]
+[ext_resource type="Texture2D" uid="uid://b81jqo58w0fag" path="res://Arts/Textures/vfx textures/pngtree-golden-light-star-burst-sparkle-glowing-lens-flare-illuminated-vector-png-image_16533768.png" id="6_x1htr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x1htr"]
+render_priority = 2
+shader = ExtResource("2_8eqvy")
+shader_parameter/AuraColor = Color(0.45407516, 0.3716947, 0.93464977, 1)
+shader_parameter/AuraIntensity = 0.87
+shader_parameter/Speed = Vector2(0.1, 0.3)
+shader_parameter/AuraTexture = ExtResource("3_5sndr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_heyqp"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("5_x1htr")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 5
+particles_anim_loop = false
+proximity_fade_enabled = true
+proximity_fade_distance = 0.05
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7q3fk"]
+lifetime_randomness = 0.07
+emission_shape = 3
+emission_box_extents = Vector3(1.99, 12.605, 1.51)
+angle_min = -179.99998
+angle_max = 180.00002
+radial_velocity_min = 1.9999776
+radial_velocity_max = 3.9999776
+gravity = Vector3(0, 0, 0)
+scale_min = 9.9
+scale_max = 14.299999
+color = Color(0.66873085, 0.24090967, 1.365921, 0.22745098)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_4414q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fcls7"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("6_x1htr")
+use_particle_trails = true
+
+[sub_resource type="Curve" id="Curve_38fak"]
+_limits = [0.0, 0.01, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_b2hhv"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_mjmkd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_x1htr"]
+curve_x = SubResource("Curve_38fak")
+curve_y = SubResource("Curve_b2hhv")
+curve_z = SubResource("Curve_mjmkd")
+
+[sub_resource type="Curve" id="Curve_x1htr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.29316574, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k8x7y"]
+curve = SubResource("Curve_x1htr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mwjxy"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 0.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 4.54
+initial_velocity_max = 7.14
+orbit_velocity_min = 1.0000001
+orbit_velocity_max = 1.3300002
+orbit_velocity_curve = SubResource("CurveXYZTexture_x1htr")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.59999996
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_k8x7y")
+color = Color(1.0445153, 1.0674319, 2.4194987, 1)
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_tnrji"]
+
+[node name="PLA" instance=ExtResource("1_0rw7n")]
+
+[node name="sword" parent="." index="0"]
+transform = Transform3D(0.6542852, -0.59251493, -0.46993285, 0.36963028, 0.79267466, -0.4848096, 0.6597608, 0.14350234, 0.73764676, 0, 0, 0)
+layers = 2
+material_overlay = SubResource("ShaderMaterial_x1htr")
+surface_material_override/0 = ExtResource("2_chkhu")
+
+[node name="Fire" type="GPUParticles3D" parent="." index="1"]
+transform = Transform3D(-4.3619142e-08, -0.06493289, 0.99788964, -2.8383067e-09, 0.99788964, 0.06493289, -1, 0, -4.371139e-08, 0, 19.603308, 0)
+visible = false
+layers = 2
+material_override = SubResource("StandardMaterial3D_heyqp")
+amount = 10
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_7q3fk")
+draw_pass_1 = SubResource("QuadMesh_4414q")
+
+[node name="Small Trails" type="GPUParticles3D" parent="." index="2"]
+transform = Transform3D(2.6180174, -0.10190116, 0, 0.10190116, 2.6180174, 0, 0, 0, 2.62, -0.43172455, 7.6280336, 0.10615921)
+layers = 2
+material_override = SubResource("StandardMaterial3D_fcls7")
+amount = 10
+lifetime = 1.56
+fixed_fps = 60
+local_coords = true
+trail_enabled = true
+trail_lifetime = 0.6
+process_material = SubResource("ParticleProcessMaterial_mwjxy")
+draw_pass_1 = SubResource("RibbonTrailMesh_tnrji")
