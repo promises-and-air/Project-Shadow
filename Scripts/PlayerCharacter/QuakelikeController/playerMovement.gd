@@ -46,7 +46,7 @@ class_name PlayerMovement
 @export var ceiling_check: ShapeCast3D
 @export var raycast_mantle_lower: RayCast3D
 @export var raycast_mantle_upper: RayCast3D
-@export var weapon_manager: WeaponManager
+# @export var weapon_manager: WeaponManager # TODO: FIX: Старый менеджер удален
 
 @export_group("Camera Settings")
 @export var mouse_sense: float = 0.1
@@ -88,8 +88,10 @@ var fall_speed: float = 0.0
 
 # ========== ONREADY VARIABLES ==========
 @onready var viewmodel_camera: Camera3D = $Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera
-@onready var animation_tree: AnimationTree = $Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/AnimationTree
-@onready var state_machine_anim: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") if animation_tree else null
+# TODO: FIX: Удалена старая модель PLA и AnimationTree. Пока ставим null, чтобы не крашилось.
+# @onready var animation_tree: AnimationTree = $Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/AnimationTree
+# @onready var state_machine_anim: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") if animation_tree else null
+
 @onready var camera_shaker: ShakerComponent3D = $Head/CameraHolder/CameraShaker/ShakerComponent3D
 @onready var head_bob_shaker: ShakerComponent3D = $Head/CameraHolder/CameraShaker/ShakerComponent3D2
 @onready var state_machine_node: StateMachine = $StateMachine
@@ -117,14 +119,16 @@ const EPSILON: float = 0.01
 func _ready() -> void:
 	add_to_group("player")
 	
-	assert(head != null, "Head node not found")
-	assert(camera != null, "Camera node not found")
-	assert(collider != null, "CollisionShape3D not found")
-	assert(viewmodel_camera != null, "viewmodel_camera node not found")
+	if head == null: push_warning("Head node not found")
+	if camera == null: push_warning("Camera node not found")
+	if collider == null: push_warning("CollisionShape3D not found")
 	
-	full_height = collider.shape.height
-	crouch_height = full_height / 2.0
-	head_offset = head.position.y
+	if collider:
+		full_height = collider.shape.height
+		crouch_height = full_height / 2.0
+	
+	if head:
+		head_offset = head.position.y
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -137,8 +141,9 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		# Camera rotation
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sense))
-		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sense))
-		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+		if head:
+			head.rotate_x(deg_to_rad(-event.relative.y * mouse_sense))
+			head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 		
 		# Viewmodel sway
 		if is_instance_valid(viewmodel_camera) and viewmodel_camera.has_method("sway"):
@@ -149,7 +154,7 @@ func _process(delta: float) -> void:
 	update_timers(delta)
 	update_camera(delta)
 	update_effects(delta)
-	_handle_interaction()
+	# _handle_interaction() # TODO: FIX: Временно отключено, пока нет weapon_manager
 
 func _physics_process(delta: float) -> void:
 	# Viewmodel sync
@@ -243,11 +248,9 @@ func apply_force(force: Vector3) -> void:
 
 func move(delta: float, accel: float, drag: float, move_speed: float = speed) -> void:
 	
-	# --- НАШ НОВЫЙ БЛОК ---
 	var current_move_speed = move_speed
 	if is_melee_attacking:
-		current_move_speed *= melee_speed_multiplier # Применяем множитель
-	# --- КОНЕЦ НОВОГО БЛОКА ---
+		current_move_speed *= melee_speed_multiplier
 	
 	direction = Vector3.ZERO
 	var h_rot: float = global_transform.basis.get_euler().y
@@ -255,10 +258,8 @@ func move(delta: float, accel: float, drag: float, move_speed: float = speed) ->
 	var h_input: float = Input.get_action_strength("right") - Input.get_action_strength("left")
 	direction = Vector3(h_input, 0, f_input).rotated(Vector3.UP, h_rot).normalized()
 	
-	# Используем current_move_speed вместо move_speed
 	var wish_vel: Vector3 = direction * current_move_speed 
 	if is_crouching and is_on_floor():
-		# (Опционально) Можно добавить множитель и сюда, если нужно замедление в приседе
 		wish_vel = direction * (crouch_speed * melee_speed_multiplier if is_melee_attacking else crouch_speed)
 	
 	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z)
@@ -354,39 +355,31 @@ func can_mantle() -> bool:
 	
 func apply_melee_lunge(lunge_direction: Vector3, lunge_force: float):
 	var horizontal_lunge = lunge_direction
-	horizontal_lunge.y = 0 # Нас интересует только горизонтальный рывок
+	horizontal_lunge.y = 0
 	horizontal_lunge = horizontal_lunge.normalized()
 
-	# Применяем силу. Можно просто добавить к скорости
 	velocity.x += horizontal_lunge.x * lunge_force
 	velocity.z += horizontal_lunge.z * lunge_force
 
-	# (Опционально) Если мы в воздухе, можно "подвесить" игрока
 	if not is_on_floor():
 		velocity.y = max(velocity.y * 0.5, lunge_force * 0.5)
 		
-func _handle_interaction() -> void:
-	if not weapon_manager: return
-	
-	if interaction_ray.is_colliding():
-		var collider = interaction_ray.get_collider()
-		
-		if collider is WeaponPickup:
-			var pickup = collider as WeaponPickup
-			_show_pickup_prompt(pickup.weapon_data.weapon_name)
-			
-			if Input.is_action_just_pressed("interact"): # (Добавь "interact" в InputMap)
-				weapon_manager.try_pickup_weapon(pickup)
-		else:
-			_hide_pickup_prompt()
-	else:
-		_hide_pickup_prompt()
+# func _handle_interaction() -> void:
+# 	if not weapon_manager: return
+# 	if interaction_ray.is_colliding():
+# 		var collider = interaction_ray.get_collider()
+# 		if collider is WeaponPickup:
+# 			var pickup = collider as WeaponPickup
+# 			_show_pickup_prompt(pickup.weapon_data.weapon_name)
+# 			if Input.is_action_just_pressed("interact"):
+# 				weapon_manager.try_pickup_weapon(pickup)
+# 		else:
+# 			_hide_pickup_prompt()
+# 	else:
+# 		_hide_pickup_prompt()
 
-# (Это заготовки для UI, пока просто выводим в консоль)
 func _show_pickup_prompt(item_name: String) -> void:
-	# if interaction_label: interaction_label.text = "[E] Поднять " + item_name
 	print("Вижу предмет: ", item_name) 
 
 func _hide_pickup_prompt() -> void:
-	# if interaction_label: interaction_label.text = ""
 	pass

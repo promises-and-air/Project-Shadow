@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=47 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" uid="uid://ca7gowohpmsx4" path="res://Scripts/PlayerCharacter/QuakelikeController/playerMovement.gd" id="1_3aho1"]
 [ext_resource type="Curve" uid="uid://cfrywcgb3icf7" path="res://Scripts/PlayerCharacter/QuakelikeController/45degreecurve.tres" id="2_4qff7"]
@@ -19,9 +19,10 @@
 [ext_resource type="Script" uid="uid://c6p8i70e7v4r4" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="16_touoi"]
 [ext_resource type="Script" uid="uid://cqqllsd47fdx5" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="17_thytq"]
 [ext_resource type="Script" uid="uid://b1drv2x10t4bn" path="res://Scripts/PlayerCharacter/QuakelikeController/grappleHook.gd" id="18_4hp3t"]
-[ext_resource type="Script" uid="uid://chqhqgfloska7" path="res://Scripts/weaponSystem/weapon_hitbox_sync.gd" id="19_43gd7"]
 [ext_resource type="Curve" uid="uid://vahpdtrhcd6d" path="res://Scripts/PlayerCharacter/QuakelikeController/grappleCurve.tres" id="19_hk0st"]
 [ext_resource type="Script" uid="uid://bmmijndfi05r7" path="res://Scripts/PlayerCharacter/QuakelikeController/ProceduralCurve.gd" id="20_1rskr"]
+[ext_resource type="Script" uid="uid://cgcrph81m6lj0" path="res://Scripts/weaponSystem/demonCombatSystem.gd" id="20_ugni6"]
+[ext_resource type="Resource" uid="uid://y5bdhshqrsus" path="res://resources/magic_data/FireMagic.tres" id="21_21i5i"]
 [ext_resource type="Script" uid="uid://lo0iiie2lcyc" path="res://Scripts/UI/canvas_layer.gd" id="22_chq6j"]
 [ext_resource type="Script" uid="uid://cr4dyif2fsp2w" path="res://Scripts/state_machine/state_machine.gd" id="23_43gd7"]
 [ext_resource type="Script" uid="uid://xgn83r6iu4wc" path="res://Scripts/state_machine/states/ground_state.gd" id="24_do0ij"]
@@ -32,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://ryvely80cx7r" path="res://Arts/Textures/vfx textures/crosshair_prog.png" id="27_21i5i"]
 [ext_resource type="Script" uid="uid://c3hrcrnw6ny18" path="res://Scripts/state_machine/states/mantle_state.gd" id="27_hk0st"]
 [ext_resource type="Script" uid="uid://d25lflodvj2j4" path="res://Scripts/state_machine/states/slide_state.gd" id="28_1rskr"]
+[ext_resource type="Script" uid="uid://bkf37ywm45rr1" path="res://Scripts/Others/FixAnimations.gd" id="33_1hio7"]
 
 [sub_resource type="Curve" id="Curve_43gd7"]
 _data = [Vector2(0, 0), 0.0, 14.506283, 0, 0, Vector2(0.17647061, 1), 2.0560458, 2.0560458, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -77,12 +79,12 @@ PositionShake = Array[ExtResource("14_hk0st")]([SubResource("Resource_jq34v")])
 height = 0.95
 radius = 0.45
 
-[sub_resource type="Resource" id="Resource_2e838"]
+[sub_resource type="Resource" id="Resource_kd16f"]
 script = ExtResource("20_1rskr")
 curve = ExtResource("19_hk0st")
-length = 0.8
+metadata/_custom_type_script = "uid://bmmijndfi05r7"
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "camera_holder", "collider", "camera", "real_camera", "ceiling_check", "raycast_mantle_lower", "raycast_mantle_upper", "weapon_manager") groups=["player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "camera_holder", "collider", "camera", "real_camera", "ceiling_check", "raycast_mantle_lower", "raycast_mantle_upper") groups=["player"]]
 collision_mask = 28
 floor_constant_speed = true
 floor_snap_length = 0.4
@@ -100,7 +102,6 @@ real_camera = NodePath("Head/CameraHolder/CameraShaker/Camera")
 ceiling_check = NodePath("CeilingCheck")
 raycast_mantle_lower = NodePath("Head/RayCastMantleLower")
 raycast_mantle_upper = NodePath("Head/RayCastMantleUpper")
-weapon_manager = NodePath("Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/WeaponSlot")
 wall_jump_multiplier = 1.2
 wall_jump_momentum_keep = 1.0
 
@@ -126,7 +127,7 @@ slideAnimation = ExtResource("10_43gd7")
 wallRunAnimation = ExtResource("11_do0ij")
 
 [node name="GrappleRay" type="RayCast3D" parent="Head/CameraHolder/CameraShaker/Camera"]
-target_position = Vector3(0, 0, -20)
+target_position = Vector3(0, 0, -30)
 collision_mask = 28
 
 [node name="Rope" parent="Head/CameraHolder/CameraShaker/Camera" instance=ExtResource("12_vs6b3")]
@@ -164,55 +165,64 @@ dash_zoom_time = 0.2
 dash_return_time = 1.0
 mantle_animation_curve = SubResource("Curve_msp70")
 
-[node name="Skeleton3D" parent="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/Hands" index="0"]
-bones/0/rotation = Quaternion(-0.26224315, -0.41010764, 0.82817566, -0.27778643)
-bones/1/rotation = Quaternion(0.4383803, -0.53604865, 0.4567137, 0.5584686)
-bones/2/rotation = Quaternion(0.11097673, -0.036989197, 0.11667074, 0.9862576)
-bones/3/rotation = Quaternion(0.04924152, -0.013872869, -0.2692302, 0.9617161)
-bones/4/rotation = Quaternion(-0.0021815633, -0.02159841, -0.22808388, 0.97339946)
-bones/5/rotation = Quaternion(-0.017881695, -0.017650459, -0.23670113, 0.9712576)
-bones/6/rotation = Quaternion(-5.909828e-08, -2.3558519e-07, -0.28311026, 0.9590874)
-bones/9/rotation = Quaternion(-0.15909848, -0.044431668, -0.3448612, 0.92400455)
-bones/12/rotation = Quaternion(-0.11325753, 0.022047412, -0.33417273, 0.9354226)
-bones/15/rotation = Quaternion(0.4077186, 0.5527211, 0.010049014, 0.726749)
-bones/16/rotation = Quaternion(-0.0023187697, 0.033364575, -0.3059206, 0.9514694)
-bones/17/rotation = Quaternion(0.28035313, 0.9597341, -0.016546585, -0.006244084)
-bones/19/position = Vector3(15.597708, -5.505482, -9.412009)
-bones/19/rotation = Quaternion(0.011270072, -0.49546516, -0.5280841, 0.6895755)
-bones/21/position = Vector3(16.155678, -5.498739, 10.316192)
-bones/21/rotation = Quaternion(-0.62296337, -0.510807, -0.051943906, 0.590165)
-bones/25/rotation = Quaternion(0.25282776, 0.4158997, 0.8259464, -0.28446138)
-bones/26/rotation = Quaternion(0.4334804, -0.56881404, 0.423661, 0.5559287)
-bones/28/rotation = Quaternion(0.12794694, 0.21071883, 0.05099807, 0.96779466)
-bones/29/rotation = Quaternion(0.06542924, -0.06345555, 0.31398103, 0.94504416)
-bones/30/rotation = Quaternion(0.036713853, -0.008411946, 0.21489455, 0.9759107)
-bones/32/rotation = Quaternion(-0.003666782, -0.0041573537, 0.28657165, 0.95804286)
-bones/33/rotation = Quaternion(-0.0023116919, 0.002700666, 0.490861, 0.87123066)
-bones/34/rotation = Quaternion(4.2755695e-05, 0.0031327351, 0.21648398, 0.97628117)
-bones/35/rotation = Quaternion(-0.14682709, 0.11691298, 0.31476322, 0.9304287)
-bones/36/rotation = Quaternion(-0.056946903, -0.017322639, 0.3704698, 0.92693543)
-bones/37/rotation = Quaternion(-0.006581569, 0.013516766, 0.33705282, 0.9413658)
-bones/38/rotation = Quaternion(-0.14972909, 0.016568061, 0.3540522, 0.9230134)
-bones/39/rotation = Quaternion(0.049743142, -0.007780324, 0.30753532, 0.9502037)
-bones/40/rotation = Quaternion(-0.0051628524, 0.041489165, 0.40752247, 0.91223764)
-bones/41/rotation = Quaternion(0.014911396, 0.6726154, 0.38134947, 0.6339864)
-bones/42/rotation = Quaternion(-0.026349133, 0.05609068, -0.30690828, 0.9497194)
-bones/43/rotation = Quaternion(0.24693452, 0.96876353, 0.021869238, -0.0065129343)
+[node name="Skeleton3D" parent="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/rig" index="0"]
+bones/1/position = Vector3(0.46950924, 0.17185019, -0.12556195)
+bones/1/rotation = Quaternion(0.2757849, 0.49705708, 0.79923356, 0.19519922)
+bones/1/scale = Vector3(1.0007057, 0.9985903, 1.0007057)
+bones/2/rotation = Quaternion(9.822841e-08, 0.20233802, 4.420708e-08, 0.9793158)
+bones/3/rotation = Quaternion(0.27942798, 0.202759, -0.06045598, 0.936565)
+bones/3/scale = Vector3(1.0002241, 0.99886453, 1.0009135)
+bones/4/rotation = Quaternion(-5.3323057e-09, 0.03436121, 2.0230368e-08, 0.99940956)
+bones/5/rotation = Quaternion(0.12167052, 0.03459947, -0.11455876, 0.9853301)
+bones/5/scale = Vector3(0.9992045, 1.0015959, 0.9992038)
+bones/6/rotation = Quaternion(0.11645712, 0.8485565, -0.28828803, 0.42811173)
+bones/7/rotation = Quaternion(0.47282165, 0.00049823517, 0.002992399, 0.88115305)
+bones/8/rotation = Quaternion(0.3858923, -0.0018882435, -0.0054826583, 0.9225257)
+bones/9/rotation = Quaternion(0.23781173, 0.96391296, 0.104745835, -0.057842027)
+bones/10/rotation = Quaternion(0.22364569, 0.00025830392, -0.003363538, 0.97466475)
+bones/11/rotation = Quaternion(0.10859532, 0.00077162334, 0.0064325556, 0.994065)
+bones/13/rotation = Quaternion(0.16340563, 0.8566436, -0.33876014, 0.35313147)
+bones/14/rotation = Quaternion(0.3889179, -0.0041107675, -0.00885653, 0.9212208)
+bones/15/rotation = Quaternion(0.4053237, 0.0059783435, 0.017663915, 0.9139831)
+bones/17/rotation = Quaternion(0.18235187, 0.788063, -0.39131016, 0.43884054)
+bones/18/rotation = Quaternion(0.5563742, 0.00749183, 0.025217215, 0.8305154)
+bones/19/rotation = Quaternion(0.48020977, -0.024048131, -0.05182311, 0.8752912)
+bones/21/rotation = Quaternion(0.22879022, 0.65378994, -0.491812, 0.5275744)
+bones/22/rotation = Quaternion(0.5430331, -0.011024021, -0.036190607, 0.8388586)
+bones/23/rotation = Quaternion(0.47878683, 0.027289825, 0.056781672, 0.87566805)
+bones/26/rotation = Quaternion(-0.32806042, 0.4364469, 0.8185312, -0.17859763)
+bones/26/scale = Vector3(1.0027817, 0.99445987, 1.0027817)
+bones/27/rotation = Quaternion(1.565303e-08, -0.21352947, -3.4323804e-08, 0.97693664)
+bones/28/rotation = Quaternion(0.42812666, -0.21308453, 0.10465188, 0.8719809)
+bones/28/scale = Vector3(1.0009022, 0.99298596, 1.0061888)
+bones/29/rotation = Quaternion(1.7082476e-08, -0.078803554, 4.6352703e-08, 0.9968902)
+bones/30/rotation = Quaternion(-0.042646747, -0.079054974, 0.078941874, 0.9928242)
+bones/30/scale = Vector3(0.9966204, 1.0070305, 0.99639446)
+bones/31/rotation = Quaternion(-0.158041, 0.8466415, -0.26058072, -0.43625575)
+bones/32/rotation = Quaternion(0.37079787, -0.08118834, 0.029450268, 0.92468923)
+bones/33/rotation = Quaternion(0.28096452, 0.0012673415, 0.0056584273, 0.9597007)
+bones/34/rotation = Quaternion(-0.24068034, 0.9633279, 0.10319979, 0.05850008)
+bones/35/rotation = Quaternion(0.22081055, 3.488991e-05, 0.003294159, 0.9753112)
+bones/36/rotation = Quaternion(0.105703086, -0.0007528312, -0.0064350236, 0.99437666)
+bones/37/rotation = Quaternion(-0.06418835, 0.97869974, 0.055740096, -0.1868683)
+bones/38/rotation = Quaternion(-0.11286513, 0.893015, -0.23095657, -0.36938456)
+bones/39/rotation = Quaternion(0.45113716, 0.0472689, -0.012980227, 0.89110744)
+bones/40/rotation = Quaternion(0.46711415, -0.0071772034, -0.01721196, 0.8840003)
+bones/41/rotation = Quaternion(-0.020364672, 0.98536414, 0.015337134, -0.16854608)
+bones/42/rotation = Quaternion(-0.1619503, 0.8057944, -0.35269552, -0.44729573)
+bones/43/rotation = Quaternion(0.46160522, 0.053381316, -0.056301016, 0.88368624)
+bones/44/rotation = Quaternion(0.3837872, 0.018364202, 0.05409907, 0.9216525)
+bones/45/rotation = Quaternion(0.043773115, 0.98764414, -0.023957398, -0.14855665)
+bones/46/rotation = Quaternion(0.14072305, -0.72454, 0.37994975, 0.5575634)
+bones/47/rotation = Quaternion(0.46300274, 0.0076250923, 0.03705577, 0.88554907)
+bones/48/rotation = Quaternion(0.39562303, -0.021913666, -0.05906487, 0.9162498)
+bones/49/rotation = Quaternion(0.039399978, 0.98918235, -0.08062027, -0.116045184)
 
-[node name="WeaponSlot" parent="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/Hands/Skeleton3D" index="1"]
-transform = Transform3D(-0.4800115, -0.43753782, 0.7603617, -0.56848574, 0.8152719, 0.110253036, -0.6681416, -0.379332, -0.6400739, 18.004404, -5.734468, 7.595409)
+[node name="BoneAttachment3D" parent="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/rig/Skeleton3D" index="1"]
+transform = Transform3D(0.8998552, -0.4117332, -0.14712366, -0.0035799742, 0.33129293, -0.94417286, 0.43555987, 0.8495738, 0.29392636, 0.36838496, 0.038827725, 0.87526095)
 
-[node name="WeaponSlot" parent="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA" index="3" node_paths=PackedStringArray("hitbox_sync", "camera_shaker")]
-hitbox_sync = NodePath("../../../../../WeaponHitbox")
-camera_shaker = NodePath("../../../../../..")
-
-[node name="WeaponHitbox" type="Node3D" parent="Head/CameraHolder/CameraShaker/Camera"]
-transform = Transform3D(1, -2.98023e-08, 1.49012e-08, 2.98023e-08, 1, -3.7252899e-09, -1.49012e-08, 3.7252907e-09, 1, -3.16795e-08, 5.9604645e-08, 5.96046e-08)
-script = ExtResource("19_43gd7")
-
-[node name="Hitbox" type="Area3D" parent="Head/CameraHolder/CameraShaker/Camera/WeaponHitbox"]
-collision_layer = 0
-collision_mask = 32
+[node name="BoneAttachment3D2" parent="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/rig/Skeleton3D" index="2"]
+transform = Transform3D(0.9564919, 0.28409272, -0.07718116, -0.13615948, 0.19781646, -0.9725892, -0.25767794, 0.93743265, 0.22316724, -0.39156243, 0.035864383, 0.82230616)
 
 [node name="ShakerComponent3D" type="Node3D" parent="Head/CameraHolder/CameraShaker"]
 script = ExtResource("13_4hp3t")
@@ -253,12 +263,22 @@ shape = SubResource("CylinderShape3D_v7r3x")
 shape = SubResource("CylinderShape3D_apj3w")
 target_position = Vector3(0, 0.5, 0)
 
-[node name="GrappleHook" type="Node" parent="." node_paths=PackedStringArray("ray", "rope")]
+[node name="CombatSystem" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "grapple_controller", "player_camera", "camera_shaker", "viewmodel_node", "magic_origin")]
+script = ExtResource("20_ugni6")
+animation_tree = NodePath("../Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/AnimationTree")
+grapple_controller = NodePath("../GrappleHook")
+player_camera = NodePath("../Head/CameraHolder/CameraShaker/Camera")
+camera_shaker = NodePath("../Head/CameraHolder/CameraShaker")
+viewmodel_node = NodePath("../Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera")
+current_spell = ExtResource("21_21i5i")
+magic_origin = NodePath("../Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/rig/Skeleton3D/BoneAttachment3D2/MagicOrigin")
+
+[node name="GrappleHook" type="Node" parent="." node_paths=PackedStringArray("ray", "rope", "hook_origin")]
 script = ExtResource("18_4hp3t")
 ray = NodePath("../Head/CameraHolder/CameraShaker/Camera/GrappleRay")
-minRestFraction = 0.2
-restLengthCurve = SubResource("Resource_2e838")
 rope = NodePath("../Head/CameraHolder/CameraShaker/Camera/Rope")
+hook_origin = NodePath("../Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/rig/Skeleton3D/BoneAttachment3D/HookOrigin")
+restLengthCurve = SubResource("Resource_kd16f")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("22_chq6j")
@@ -306,7 +326,7 @@ fill_mode = 5
 texture_under = ExtResource("27_21i5i")
 texture_progress = ExtResource("27_21i5i")
 script = ExtResource("24_vs6b3")
-weapon_manager = NodePath("../../../Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/WeaponSlot")
+weapon_manager = NodePath("../../../CombatSystem")
 
 [node name="HUD" type="CenterContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -341,4 +361,9 @@ script = ExtResource("27_hk0st")
 [node name="SlideState" type="Node" parent="StateMachine"]
 script = ExtResource("28_1rskr")
 
+[node name="Node" type="Node" parent="." node_paths=PackedStringArray("player_node")]
+script = ExtResource("33_1hio7")
+player_node = NodePath("../Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA/AnimationPlayer")
+
 [editable path="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera"]
+[editable path="Head/CameraHolder/CameraShaker/Camera/SubViewportContainer/SubViewport/viewmodel_camera/PLA"]

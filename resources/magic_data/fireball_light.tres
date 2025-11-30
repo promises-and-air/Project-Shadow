@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=3 format=3 uid="uid://dxnpefysm1ehv"]
+
+[ext_resource type="Script" uid="uid://ccklc1n2ept6g" path="res://resources/magic_data/ProjectileData.gd" id="1_7344n"]
+[ext_resource type="PackedScene" uid="uid://n05ovr5qs8gr" path="res://Scenes/weapons/magic/fireball.tscn" id="1_esehe"]
+
+[resource]
+script = ExtResource("1_7344n")
+projectile_scene = ExtResource("1_esehe")
+speed = 30.0
+knockback = 0.0
+metadata/_custom_type_script = "uid://ccklc1n2ept6g"

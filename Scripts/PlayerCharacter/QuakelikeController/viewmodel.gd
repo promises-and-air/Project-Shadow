@@ -1,6 +1,9 @@
 extends Camera3D
 
-@onready var pla: Node3D = $PLA
+
+signal on_attack_point
+@onready var pla: Node3D = $PLA 
+
 @onready var player: PlayerMovement = null
 @onready var state_machine: StateMachine = null
 
@@ -91,10 +94,11 @@ const LERP_SPEED_SLOW: float = 5.0
 
 
 func _ready() -> void:
-	assert(pla != null, "PLA node not found in viewmodel camera!")
+	# assert(pla != null, "PLA node not found in viewmodel camera!")
 	
-	pla_base_position = pla.position
-	pla_base_rotation = pla.rotation
+	if pla:
+		pla_base_position = pla.position
+		pla_base_rotation = pla.rotation
 	
 	# Deferred player reference to avoid race condition
 	call_deferred("_setup_player_reference")
@@ -410,3 +414,7 @@ func jump_kick(intensity: float = 0.08) -> void:
 	# Легкий толчок рук вниз при прыжке
 	land_strength = intensity
 	land_time = 0.0
+	
+func anim_event_spawn():
+	print("🔥 АНИМАЦИЯ ВЫЗВАЛА ФУНКЦИЮ!") # <-- ПРОВЕРКА 4
+	on_attack_point.emit()

@@ -32,9 +32,6 @@ func _on_update_magic_ui(charge_ratio: float, cooldown_ratio: float) -> void:
 		value = cooldown_ratio
 		tint_progress = color_cooldown # Красим полоску в красный
 		
-		# Можно сделать инверсию (чтобы круг уменьшался, а не рос)
-		# fill_mode = FILL_CLOCKWISE 
-		
 	elif charge_ratio > 0.0:
 		# --- ЗАРЯДКА ---
 		value = charge_ratio

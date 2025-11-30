@@ -97,7 +97,7 @@ func check_transitions() -> State:
 	if not state_machine:
 		return null
 	
-	if Input.is_action_just_pressed("dash") and player.can_dash:
+	if Input.is_action_just_pressed("demon_dash") and player.can_dash:
 		player.can_dash = false
 		player.dash_cooldown = 1.2
 		return state_machine.states.get("dashstate")

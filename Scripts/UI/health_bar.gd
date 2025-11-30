@@ -103,4 +103,4 @@ func _update_bar(instant: bool = false) -> void:
 		tween.set_parallel(true)
 		
 		tween.tween_property(health_pivot, "scale:x", percent, 0.2).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-		tween.tween_property(damage_pivot, "scale:x", percent, 0.2).set_delay(0.05).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(damage_pivot, "scale:x", percent, 0.2).set_delay(0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

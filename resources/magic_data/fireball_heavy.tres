@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=3 format=3 uid="uid://b776rwkl3ehbv"]
+
+[ext_resource type="PackedScene" uid="uid://n05ovr5qs8gr" path="res://Scenes/weapons/magic/fireball.tscn" id="1_0wtn7"]
+[ext_resource type="Script" uid="uid://ccklc1n2ept6g" path="res://resources/magic_data/ProjectileData.gd" id="1_pyqfy"]
+
+[resource]
+script = ExtResource("1_pyqfy")
+projectile_scene = ExtResource("1_0wtn7")
+scale = 2.5
+damage = 70
+knockback = 1.0
+camera_shake_name = "magic_heavy"
+burn_duration = 4.0
+burn_damage = 10
+metadata/_custom_type_script = "uid://ccklc1n2ept6g"
