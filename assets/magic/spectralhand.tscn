@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbmbbawau3yoj"]
+
+[ext_resource type="Shader" uid="uid://k78o6qaqlhua" path="res://s_spectralhand.gdshader" id="1_d5tnr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sywu1"]
+render_priority = 0
+shader = ExtResource("1_d5tnr")
+shader_parameter/color = Color(0, 0.5, 1, 1)
+shader_parameter/rim_power = 2.1350000776625
+shader_parameter/pulse_speed = 7.3850003507875
+
+[sub_resource type="SphereMesh" id="SphereMesh_diero"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.505, 0, 0, 0, 1, 0, 0, 0, 1.49, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_sywu1")
+mesh = SubResource("SphereMesh_diero")

@@ -11,15 +11,15 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xud62"]
 render_priority = 0
 shader = ExtResource("2_b08jt")
-shader_parameter/Ball_color = Color(1.697393, 0.3620503, 0, 1)
-shader_parameter/Fresnel = 5.0
+shader_parameter/Ball_color = Color(0.56780994, 0.093238026, 0, 1)
+shader_parameter/Fresnel = 2.88
 
 [sub_resource type="SphereMesh" id="SphereMesh_w4y4m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkpy6"]
 render_priority = 1
 shader = ExtResource("2_ocbus")
-shader_parameter/Fire_Color = Color(2.2639842, 1.3416487, 0, 1)
+shader_parameter/Fire_Color = Color(2.9083786, 1.2560905, 0, 1)
 shader_parameter/Speed = Vector2(0.1, 2)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f7m8q"]
@@ -39,7 +39,7 @@ albedo_texture = ExtResource("6_7osm2")
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_kfuah"]
+[sub_resource type="CurveTexture" id="CurveTexture_7osm2"]
 curve = SubResource("Curve_v1g3w")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y8avp"]
@@ -54,15 +54,15 @@ radial_velocity_min = 0.99997765
 radial_velocity_max = 1.9999776
 gravity = Vector3(0, 0, 0)
 scale_max = 1.5
-scale_curve = SubResource("CurveTexture_kfuah")
+scale_curve = SubResource("CurveTexture_7osm2")
 color = Color(2.1849911, 1.1441998, 0.69457793, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_gsd6x"]
 size = Vector2(0.1, 0.5)
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_7osm2"]
-
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_w74uj"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_7uj4i"]
 
 [node name="Fireball" type="Node3D"]
 script = ExtResource("1_f7m8q")
@@ -96,19 +96,7 @@ process_material = SubResource("ParticleProcessMaterial_y8avp")
 draw_pass_1 = SubResource("QuadMesh_gsd6x")
 
 [node name="Trail3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-8.960872e-09, -0.205, 9.644008e-08, 0.205, -8.960835e-09, 7.982994e-08, -7.982993e-08, 9.644009e-08, 0.205, 0, 0, 0)
-material_override = ExtResource("6_w74uj")
-cast_shadow = 0
-mesh = SubResource("ImmediateMesh_7osm2")
-script = ExtResource("7_7uj4i")
-fromWidth = 1.0
-toWidth = 1.0
-lifespan = 0.3
-startColor = Color(3.4751832, 0.6408013, 0, 1)
-endColor = Color(1.1374342, 0, 0.29527268, 0.30980393)
-
-[node name="Trail3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(8.960847e-09, 0.205, -3.095414e-08, 0.205, -8.960835e-09, 7.982994e-08, 7.982994e-08, -3.095414e-08, -0.205, 0, 0, 0)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 3.894143e-07, -3.894143e-07, 1.702184e-14, 1, 0, 0, 0)
 material_override = ExtResource("6_w74uj")
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_w74uj")
@@ -116,8 +104,19 @@ script = ExtResource("7_7uj4i")
 fromWidth = 1.0
 toWidth = 1.0
 lifespan = 0.3
-startColor = Color(3.2359245, 0.5936433, 0, 1)
-endColor = Color(1.1374342, 0, 0.29527268, 0)
+startColor = Color(3.4751832, 0.6408013, 0, 1)
+endColor = Color(1, 0.30588236, 0.12156863, 0)
+
+[node name="Trail3D2" type="MeshInstance3D" parent="."]
+material_override = ExtResource("6_w74uj")
+cast_shadow = 0
+mesh = SubResource("ImmediateMesh_7uj4i")
+script = ExtResource("7_7uj4i")
+fromWidth = 1.0
+toWidth = 1.0
+lifespan = 0.3
+startColor = Color(3.4751832, 0.6408013, 0, 1)
+endColor = Color(1, 0.30588236, 0.12156863, 0)
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]

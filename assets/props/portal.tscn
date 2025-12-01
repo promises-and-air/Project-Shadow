@@ -21,18 +21,17 @@ albedo_texture_force_srgb = true
 use_particle_trails = true
 
 [sub_resource type="Curve" id="Curve_gonsm"]
-_limits = [-2.0, 1.0, 0.0, 1.0]
-_data = [Vector2(0, -0.58426964), 0.0, 0.0, 0, 0, Vector2(1, -2), 0.0, 0.0, 0, 0]
+_limits = [-0.0048747063, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.02228415), 0.0, 0.0, 0, 0, Vector2(1, -0.0048747063), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_pm0ja"]
-_limits = [-0.01, 0.0, 0.0, 1.0]
-_data = [Vector2(0, -0.004494382), 0.0, 0.0, 0, 0, Vector2(1, -0.01), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_sb0qq"]
 _limits = [-2.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0.08796296, -2), 0.0, 0.0, 0, 0, Vector2(1, 0.33707857), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.08796296, -2), 0.0, 0.0, 0, 0, Vector2(1, -2), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_orbng"]
@@ -68,6 +67,7 @@ mesh = SubResource("QuadMesh_kaw17")
 transform = Transform3D(1.465, 0, 0, 0, 1.465, 0, 0, 0, 1.465, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_kaw17")
 amount = 150
+lifetime = 1.3699999999999999
 fixed_fps = 60
 local_coords = true
 trail_enabled = true

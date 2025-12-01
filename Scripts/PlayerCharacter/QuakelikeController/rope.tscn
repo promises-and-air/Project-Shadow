@@ -1,4 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2gc2gd8uieuy"]
+[gd_scene load_steps=6 format=3 uid="uid://c2gc2gd8uieuy"]
+
+[ext_resource type="Shader" uid="uid://conqv07tf0rx0" path="res://assets/vfx shaders/s_rope.gdshader" id="1_76mwi"]
+[ext_resource type="Texture2D" uid="uid://canxb0xxw00ve" path="res://Arts/Textures/vfx textures/T_VFX_Noi55.png" id="2_t8krj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t8krj"]
+render_priority = 0
+shader = ExtResource("1_76mwi")
+shader_parameter/color = Color(0, 1, 0.8, 1)
+shader_parameter/speed = 1.2310002959724997
+shader_parameter/beam_length = 1.0
+shader_parameter/tile_factor = 3.35000015586512
+shader_parameter/beam_texture = ExtResource("2_t8krj")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rmd5f"]
 albedo_color = Color(0, 0, 0, 1)
@@ -14,5 +26,5 @@ radial_segments = 16
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.5)
-layers = 2
+material_override = SubResource("ShaderMaterial_t8krj")
 mesh = SubResource("CylinderMesh_djnon")

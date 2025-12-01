@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://b2w1f4ulg4sxf"]
 
-[ext_resource type="Texture2D" uid="uid://bh01vdktavq0o" path="res://Arts/Textures/vfx textures/fireball_trail.png" id="1_8o6xr"]
+[ext_resource type="Texture2D" uid="uid://cuwkedfahb8cu" path="res://Arts/Textures/vfx textures/Zoin's Flame Trail 7.png" id="1_8o6xr"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_s04by"]
 expanded_output_ports = [0]

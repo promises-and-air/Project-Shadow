@@ -40,7 +40,7 @@ var magic_charge_start_time: float = 0.0
 signal magic_ui_update(charge_ratio: float, cooldown_ratio: float)
 # Данные для следующего выстрела (храним между отпусканием кнопки и спавном)
 var _next_shot_data: ProjectileData = null 
-
+var _active_charge_vfx: Node3D = null
 # Камера и Твины
 var fov_tween: Tween
 var camera_tween: Tween
@@ -106,16 +106,26 @@ func _start_charging_magic() -> void:
 	is_charging_magic = true
 	magic_charge_start_time = Time.get_ticks_msec() / 1000.0
 	
-	# 1. Запускаем анимацию ЗАМАХА (fire_hold)
-	# Дерево само перейдет в fire_idle по окончании анимации (Switch Mode: AtEnd)
 	right_hand_playback.travel(ANIM_CHARGE_START)
-	
-	# 2. Начинаем плавный зум
 	_start_fov_zoom(current_spell.fov_zoom_amount, current_spell.charge_duration)
+	
+	# --- НОВОЕ: СПАВН ЭФФЕКТА ЗАРЯДКИ ---
+	if current_spell.charge_vfx_scene and magic_origin:
+		# Удаляем старый, если вдруг остался
+		if _active_charge_vfx: _active_charge_vfx.queue_free()
+		
+		_active_charge_vfx = current_spell.charge_vfx_scene.instantiate()
+		magic_origin.add_child(_active_charge_vfx)
+		# Начинаем с нулевого размера
+		_active_charge_vfx.scale = Vector3.ZERO
 
 func _finish_charging_magic() -> void:
 	if not is_charging_magic or not current_spell: return
 	
+	if is_instance_valid(_active_charge_vfx):
+		_active_charge_vfx.queue_free()
+		_active_charge_vfx = null
+		
 	is_charging_magic = false
 	var hold_duration = (Time.get_ticks_msec() / 1000.0) - magic_charge_start_time
 	
@@ -216,16 +226,20 @@ func _update_ui_signals() -> void:
 	var charge_val: float = 0.0
 	var cd_val: float = 0.0
 	
-	# Расчет заряда (если сейчас заряжаем)
 	if is_charging_magic and current_spell:
 		var time_held = (Time.get_ticks_msec() / 1000.0) - magic_charge_start_time
-		# Считаем от 0.0 до 1.0 (заполнено)
 		charge_val = clamp(time_held / current_spell.charge_time_required, 0.0, 1.0)
+		
+		# --- НОВОЕ: ОБНОВЛЕНИЕ РАЗМЕРА СФЕРЫ ---
+		if is_instance_valid(_active_charge_vfx):
+			# Сфера растет от 0 до 1. Можешь умножить на 2.0, если сфера слишком мелкая
+			var target_scale = Vector3.ONE * charge_val 
+			# Добавим немного пульсации, если заряд полный (опционально)
+			if charge_val >= 1.0:
+				target_scale += Vector3.ONE * sin(Time.get_ticks_msec() * 0.01) * 0.1
+				
+			_active_charge_vfx.scale = target_scale # Применяем масштаб
 	
-	# Расчет кулдауна (если он у тебя есть, пока передаем 0.0)
-	# Если добавишь таймер кулдауна, считай его тут: cd_val = timer.time_left / timer.wait_time
-	
-	# Отправляем данные в UI
 	magic_ui_update.emit(charge_val, cd_val)
 # ==============================================================================
 # 🎯 ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ (HOOK & AIM)
@@ -256,7 +270,7 @@ func _try_hook() -> void:
 	if left_hand_playback:
 		left_hand_playback.travel(ANIM_HOOK_THROW)
 		# Тут можно оставить таймер, так как это не боевая магия
-		await get_tree().create_timer(0.16).timeout
+		await get_tree().create_timer(0.2).timeout
 		if Input.is_action_pressed("hook_shot") and is_hooking:
 			grapple_controller.launch()
 
