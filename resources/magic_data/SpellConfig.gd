@@ -9,6 +9,11 @@ class_name SpellConfig
 @export_group("Visuals")
 @export var charge_vfx_scene: PackedScene
 
+@export_group("Animations")
+@export var anim_name_start: String = "fire_hold"    # Начало
+@export var anim_name_release: String = "fire_release" # Выстрел
+@export var anim_name_loop: String = "fire_idle"
+
 @export_category("Projectiles")
 @export var light_shot: ProjectileData        # Сюда положишь файл "слабого" шара
 @export var heavy_shot: ProjectileData        # Сюда положишь файл "сильного" шара

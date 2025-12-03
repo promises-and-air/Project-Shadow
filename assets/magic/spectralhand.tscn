@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbmbbawau3yoj"]
+[gd_scene load_steps=5 format=3 uid="uid://cbmbbawau3yoj"]
 
 [ext_resource type="Shader" uid="uid://k78o6qaqlhua" path="res://s_spectralhand.gdshader" id="1_d5tnr"]
+[ext_resource type="PackedScene" uid="uid://j6ojl3vau628" path="res://assets/magic/spectralhand2.tscn" id="3_diero"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sywu1"]
 render_priority = 0
@@ -15,5 +16,9 @@ shader_parameter/pulse_speed = 7.3850003507875
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.505, 0, 0, 0, 1, 0, 0, 0, 1.49, 0, 0, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_sywu1")
 mesh = SubResource("SphereMesh_diero")
+
+[node name="convert2" parent="." instance=ExtResource("3_diero")]
+transform = Transform3D(0.38134906, -0.07067881, -4.4330654, 0.42796493, 4.4292436, -0.033802763, 4.412926, -0.42343962, 0.38636813, 0, -0.62, -1.94)

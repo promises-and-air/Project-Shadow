@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://n05ovr5qs8gr"]
+[gd_scene load_steps=20 format=3 uid="uid://n05ovr5qs8gr"]
 
 [ext_resource type="Script" uid="uid://8ln4yir3d8p4" path="res://Scripts/weaponSystem/magic/fireball.gd" id="1_f7m8q"]
 [ext_resource type="Shader" uid="uid://dsb001vde4aqn" path="res://Scenes/weapons/magic/fire_header_shader.tres" id="2_b08jt"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ckietd1dgshra" path="res://Arts/Textures/vfx textures/T_VFX_basic1.PNG" id="6_7osm2"]
 [ext_resource type="Material" uid="uid://qwwtkodnexli" path="res://Scenes/weapons/magic/material_fireball_trail1.tres" id="6_w74uj"]
 [ext_resource type="Script" uid="uid://mdutm86denvu" path="res://assets/vfx shaders/Trail3D.gd" id="7_7uj4i"]
+[ext_resource type="PackedScene" uid="uid://bwg0s21ipwovx" path="res://assets/magic/fireball2.tscn" id="8_w74uj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xud62"]
 render_priority = 0
@@ -69,11 +70,13 @@ script = ExtResource("1_f7m8q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.34, 0, -5.1338574e-08, 0, 0.34, 0, 5.1338574e-08, 0, -0.34, -8.742278e-09, 0, -0.08966558)
+visible = false
 material_override = SubResource("ShaderMaterial_xud62")
 mesh = SubResource("SphereMesh_w4y4m")
 
 [node name="FireballMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.305, 0, -4.605372e-08, 0, 0.305, 0, 4.605372e-08, 0, -0.305, 8.742278e-09, 0, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_wkpy6")
 cast_shadow = 0
 mesh = ExtResource("3_b08jt")
@@ -97,6 +100,7 @@ draw_pass_1 = SubResource("QuadMesh_gsd6x")
 
 [node name="Trail3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 3.894143e-07, -3.894143e-07, 1.702184e-14, 1, 0, 0, 0)
+visible = false
 material_override = ExtResource("6_w74uj")
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_w74uj")
@@ -108,6 +112,7 @@ startColor = Color(3.4751832, 0.6408013, 0, 1)
 endColor = Color(1, 0.30588236, 0.12156863, 0)
 
 [node name="Trail3D2" type="MeshInstance3D" parent="."]
+visible = false
 material_override = ExtResource("6_w74uj")
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_7uj4i")
@@ -117,6 +122,8 @@ toWidth = 1.0
 lifespan = 0.3
 startColor = Color(3.4751832, 0.6408013, 0, 1)
 endColor = Color(1, 0.30588236, 0.12156863, 0)
+
+[node name="fireball2" parent="." instance=ExtResource("8_w74uj")]
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbl7flearkqje"]
+
+[ext_resource type="Script" uid="uid://ih4rhjdnony5" path="res://Scripts/weaponSystem/magic/lightning.gd" id="1_8tvbc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uo0v4"]
+size = Vector3(0.1, 0.1, 1)
+
+[node name="Lightning" type="Node3D" node_paths=PackedStringArray("beam_mesh")]
+script = ExtResource("1_8tvbc")
+beam_mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_uo0v4")

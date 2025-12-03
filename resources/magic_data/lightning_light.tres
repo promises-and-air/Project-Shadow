@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=3 format=3 uid="uid://2odyudftu1pu"]
+
+[ext_resource type="PackedScene" uid="uid://bbl7flearkqje" path="res://Scenes/weapons/magic/lightning.tscn" id="1_2xlr0"]
+[ext_resource type="Script" uid="uid://ccklc1n2ept6g" path="res://resources/magic_data/ProjectileData.gd" id="1_21qev"]
+
+[resource]
+script = ExtResource("1_21qev")
+projectile_scene = ExtResource("1_2xlr0")
+scale = 0.2
+lifetime = 0.5
+damage = 15
+metadata/_custom_type_script = "uid://ccklc1n2ept6g"

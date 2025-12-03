@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SpellConfig" load_steps=4 format=3 uid="uid://bw64otmeexycx"]
+
+[ext_resource type="Resource" uid="uid://13mk0my5yxi8" path="res://resources/magic_data/lightning_heavy.tres" id="1_i3fg6"]
+[ext_resource type="Script" uid="uid://digtihqbqogk6" path="res://resources/magic_data/SpellConfig.gd" id="1_p3p47"]
+[ext_resource type="Resource" uid="uid://2odyudftu1pu" path="res://resources/magic_data/lightning_light.tres" id="2_hhgum"]
+
+[resource]
+script = ExtResource("1_p3p47")
+charge_time_required = 1.0
+charge_duration = 2.0
+light_shot = ExtResource("2_hhgum")
+heavy_shot = ExtResource("1_i3fg6")
+metadata/_custom_type_script = "uid://digtihqbqogk6"
