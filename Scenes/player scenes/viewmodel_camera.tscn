@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://crm0oehiwfse0"]
+[gd_scene load_steps=47 format=3 uid="uid://crm0oehiwfse0"]
 
 [ext_resource type="Script" uid="uid://caths748dbcbb" path="res://Scripts/PlayerCharacter/QuakelikeController/viewmodel.gd" id="1_yv3jn"]
 [ext_resource type="Curve" uid="uid://vahpdtrhcd6d" path="res://Scripts/PlayerCharacter/QuakelikeController/grappleCurve.tres" id="2_monst"]
@@ -118,6 +118,15 @@ animation = &"fire_release"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lxvi3"]
 animation = &"idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ir7kh"]
+animation = &"lightning_hold"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iwujp"]
+animation = &"lightning_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bnju3"]
+animation = &"lightning_release"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k80qd"]
 advance_mode = 2
 
@@ -137,20 +146,44 @@ advance_mode = 0
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u3aud"]
+xfade_time = 0.3
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ed3i"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3l4xx"]
+xfade_time = 0.3
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p387l"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_e7ho3"]
 states/fire_hold/node = SubResource("AnimationNodeAnimation_bbnd0")
-states/fire_hold/position = Vector2(472, 8)
+states/fire_hold/position = Vector2(418, -121)
 states/fire_idle/node = SubResource("AnimationNodeAnimation_k80qd")
-states/fire_idle/position = Vector2(472, 92)
+states/fire_idle/position = Vector2(418, -37)
 states/fire_release/node = SubResource("AnimationNodeAnimation_e7ho3")
-states/fire_release/position = Vector2(472, 160)
+states/fire_release/position = Vector2(418, 31)
 states/idle/node = SubResource("AnimationNodeAnimation_lxvi3")
 states/idle/position = Vector2(295, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_k80qd"), "idle", "fire_hold", SubResource("AnimationNodeStateMachineTransition_ir7kh"), "fire_hold", "fire_idle", SubResource("AnimationNodeStateMachineTransition_kj8uk"), "fire_idle", "fire_release", SubResource("AnimationNodeStateMachineTransition_5fm3q"), "fire_release", "idle", SubResource("AnimationNodeStateMachineTransition_8vgjs")]
-graph_offset = Vector2(-104, -26)
+states/lightning_hold/node = SubResource("AnimationNodeAnimation_ir7kh")
+states/lightning_hold/position = Vector2(418, 163)
+states/lightning_idle/node = SubResource("AnimationNodeAnimation_iwujp")
+states/lightning_idle/position = Vector2(418, 228)
+states/lightning_release/node = SubResource("AnimationNodeAnimation_bnju3")
+states/lightning_release/position = Vector2(418, 296)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_k80qd"), "idle", "fire_hold", SubResource("AnimationNodeStateMachineTransition_ir7kh"), "fire_hold", "fire_idle", SubResource("AnimationNodeStateMachineTransition_kj8uk"), "fire_idle", "fire_release", SubResource("AnimationNodeStateMachineTransition_5fm3q"), "fire_release", "idle", SubResource("AnimationNodeStateMachineTransition_8vgjs"), "idle", "lightning_hold", SubResource("AnimationNodeStateMachineTransition_u3aud"), "lightning_hold", "lightning_idle", SubResource("AnimationNodeStateMachineTransition_5ed3i"), "lightning_idle", "lightning_release", SubResource("AnimationNodeStateMachineTransition_3l4xx"), "lightning_release", "idle", SubResource("AnimationNodeStateMachineTransition_p387l")]
+graph_offset = Vector2(-269, -70)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_thyv6"]
-graph_offset = Vector2(-485.8532, 227.75558)
+graph_offset = Vector2(-585.1384, 289.40762)
 nodes/output/position = Vector2(400, 280)
 nodes/RightHand_SM/node = SubResource("AnimationNodeStateMachine_e7ho3")
 nodes/RightHand_SM/position = Vector2(-260, 500)
@@ -174,48 +207,48 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -
 
 [node name="Skeleton3D" parent="PLA/rig" index="0"]
 bones/1/position = Vector3(0.46950924, 0.17185019, -0.12556195)
-bones/1/rotation = Quaternion(0.28194746, 0.4926986, 0.80110425, 0.18969938)
-bones/1/scale = Vector3(1.000703, 0.9985958, 1.000703)
-bones/2/rotation = Quaternion(1.5202845e-08, 0.20212731, 1.9157042e-08, 0.9793593)
-bones/3/rotation = Quaternion(0.30797872, 0.20210877, -0.06706984, 0.9272556)
-bones/3/scale = Vector3(1.0002233, 0.9988693, 1.0009096)
-bones/4/rotation = Quaternion(4.3861395e-08, 0.038956508, -5.6831638e-08, 0.999241)
-bones/5/rotation = Quaternion(0.10965962, 0.03927497, -0.13621652, 0.9838076)
-bones/5/scale = Vector3(0.9992181, 1.0015683, 0.99921757)
-bones/6/rotation = Quaternion(0.08020249, 0.8697151, -0.21622643, 0.4363594)
-bones/7/rotation = Quaternion(0.4393419, 0.0003853863, 0.0030088597, 0.8983149)
-bones/8/rotation = Quaternion(0.3509179, -0.0016805633, -0.005549804, 0.9363883)
-bones/9/rotation = Quaternion(0.2367583, 0.9641249, 0.10531362, -0.057600223)
-bones/10/rotation = Quaternion(0.22649312, 0.0003595024, -0.0033902465, 0.9740068)
-bones/11/rotation = Quaternion(0.111500114, 0.00079039467, 0.0064305156, 0.99374336)
-bones/13/rotation = Quaternion(0.15554743, 0.8644057, -0.31804678, 0.35700706)
-bones/14/rotation = Quaternion(0.33116356, -0.0044073407, -0.008819558, 0.94352186)
-bones/15/rotation = Quaternion(0.34797853, 0.004873772, 0.018000264, 0.937317)
-bones/17/rotation = Quaternion(0.18340982, 0.7871169, -0.39320973, 0.4383994)
-bones/18/rotation = Quaternion(0.55795664, 0.0075399294, 0.025202788, 0.82945305)
-bones/19/rotation = Quaternion(0.4818785, -0.024147054, -0.05177658, 0.87437373)
-bones/21/rotation = Quaternion(0.22964866, 0.6529885, -0.49287567, 0.5272013)
-bones/22/rotation = Quaternion(0.54418135, -0.011073571, -0.03617545, 0.83811414)
-bones/23/rotation = Quaternion(0.4799848, 0.027367622, 0.056744147, 0.87501186)
+bones/1/rotation = Quaternion(0.27206954, 0.50134563, 0.79762644, 0.1960174)
+bones/1/scale = Vector3(1.0006478, 0.998706, 1.0006478)
+bones/2/rotation = Quaternion(4.5693007e-08, 0.20177965, 2.1880576e-08, 0.97943103)
+bones/3/rotation = Quaternion(0.26811045, 0.2017857, -0.05751188, 0.9402615)
+bones/3/scale = Vector3(1.0002058, 0.99896616, 1.00083)
+bones/4/rotation = Quaternion(-2.7083681e-08, 0.029767413, -5.4573706e-09, 0.99955696)
+bones/5/rotation = Quaternion(0.13208844, 0.030006018, -0.11144287, 0.9844963)
+bones/5/scale = Vector3(0.9992567, 1.0014904, 0.9992567)
+bones/6/rotation = Quaternion(0.13189547, 0.83755165, -0.31885013, 0.42361027)
+bones/7/rotation = Quaternion(0.47214785, 0.0004958647, 0.0029926419, 0.8815142)
+bones/8/rotation = Quaternion(0.38518763, -0.0018839947, -0.0054842643, 0.9228201)
+bones/9/rotation = Quaternion(0.23216501, 0.9650305, 0.10778876, -0.05654474)
+bones/10/rotation = Quaternion(0.23887633, 0.00079885096, -0.003513452, 0.9710434)
+bones/11/rotation = Quaternion(0.12414559, 0.0008722055, 0.0064199762, 0.99224293)
+bones/13/rotation = Quaternion(0.16696247, 0.8561943, -0.33730724, 0.35394737)
+bones/14/rotation = Quaternion(0.39763707, -0.007612459, -0.007336375, 0.91748196)
+bones/15/rotation = Quaternion(0.41380337, 0.006142466, 0.01760773, 0.91017526)
+bones/17/rotation = Quaternion(0.1880084, 0.7829398, -0.40146255, 0.43644702)
+bones/18/rotation = Quaternion(0.5648299, 0.0077489987, 0.025139308, 0.82478803)
+bones/19/rotation = Quaternion(0.48912722, -0.024576405, -0.051574454, 0.8703395)
+bones/21/rotation = Quaternion(0.23338345, 0.6494751, -0.497496, 0.52555877)
+bones/22/rotation = Quaternion(0.5491705, -0.0112892995, -0.036108848, 0.83485365)
+bones/23/rotation = Quaternion(0.48519552, 0.02770547, 0.05657981, 0.8721333)
 bones/26/position = Vector3(-0.46950924, 0.1718502, -0.12556195)
-bones/26/rotation = Quaternion(-0.3293093, 0.43517065, 0.81887555, -0.17783388)
-bones/26/scale = Vector3(1.0029014, 0.99422264, 1.0029014)
-bones/27/rotation = Quaternion(-5.650329e-08, -0.2128721, -1.0721829e-08, 0.97708017)
-bones/28/rotation = Quaternion(0.44142818, -0.21242185, 0.10846579, 0.86501646)
-bones/28/scale = Vector3(1.0009668, 0.9923253, 1.0067978)
-bones/29/rotation = Quaternion(3.0005506e-08, -0.05177303, 6.544033e-11, 0.9986589)
-bones/30/rotation = Quaternion(-0.06982531, -0.051933147, 0.07552229, 0.9933398)
-bones/30/scale = Vector3(0.9964583, 1.0072861, 0.99630463)
-bones/31/rotation = Quaternion(-0.14495887, 0.8583556, -0.21568541, -0.4423717)
-bones/32/rotation = Quaternion(0.33255962, -0.07892736, 0.024882743, 0.9394442)
-bones/33/rotation = Quaternion(0.24126971, 0.0010336974, 0.005705717, 0.97044086)
+bones/26/rotation = Quaternion(-0.32900643, 0.43510124, 0.81887805, -0.1785514)
+bones/26/scale = Vector3(1.0028797, 0.99426544, 1.0028799)
+bones/27/rotation = Quaternion(1.4537095e-08, -0.21368846, -2.0828944e-08, 0.97690195)
+bones/28/rotation = Quaternion(0.43181568, -0.21329564, 0.10591255, 0.86995566)
+bones/28/scale = Vector3(1.0009308, 0.9926914, 1.0064597)
+bones/29/rotation = Quaternion(-2.0654932e-08, -0.07584621, -3.9445545e-08, 0.99711955)
+bones/30/rotation = Quaternion(-0.049033944, -0.076030634, 0.07901247, 0.9927599)
+bones/30/scale = Vector3(0.99651587, 1.0072323, 0.99630046)
+bones/31/rotation = Quaternion(-0.15688749, 0.8477804, -0.25654355, -0.43685263)
+bones/32/rotation = Quaternion(0.3686045, -0.08095368, 0.029135603, 0.9255962)
+bones/33/rotation = Quaternion(0.27867818, 0.0012539465, 0.0056612873, 0.96036714)
 bones/34/rotation = Quaternion(-0.24068034, 0.9633279, 0.10319979, 0.05850008)
-bones/35/rotation = Quaternion(0.19524753, -5.1251398e-05, 0.0032940132, 0.98074853)
-bones/36/rotation = Quaternion(0.07968118, -0.00058442744, -0.006452502, 0.99679935)
+bones/35/rotation = Quaternion(0.21792522, 2.5094689e-05, 0.0032944325, 0.97596)
+bones/36/rotation = Quaternion(0.10276177, -0.0007338465, -0.006437244, 0.99468493)
 bones/37/rotation = Quaternion(-0.06418835, 0.97869974, 0.055740096, -0.1868683)
-bones/38/rotation = Quaternion(-0.11457997, 0.8921129, -0.23414806, -0.3690268)
-bones/39/rotation = Quaternion(0.50489426, 0.046403997, -0.015863659, 0.8617871)
-bones/40/rotation = Quaternion(0.52040565, -0.008218328, -0.0167397, 0.8537155)
+bones/38/rotation = Quaternion(-0.11258876, 0.8931591, -0.23044212, -0.36944163)
+bones/39/rotation = Quaternion(0.45837137, 0.047158293, -0.013362378, 0.88740814)
+bones/40/rotation = Quaternion(0.47429007, -0.0073170867, -0.01715301, 0.8801712)
 bones/41/rotation = Quaternion(-0.020364672, 0.98536414, 0.015337134, -0.16854608)
 bones/42/rotation = Quaternion(-0.1619503, 0.8057944, -0.35269552, -0.44729573)
 bones/43/rotation = Quaternion(0.46160522, 0.053381316, -0.056301016, 0.88368624)
@@ -231,7 +264,7 @@ layers = 2
 surface_material_override/0 = SubResource("ShaderMaterial_k80qd")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="PLA/rig/Skeleton3D" index="1"]
-transform = Transform3D(-0.9903477, -0.10608788, -0.098945096, -0.11667478, 0.17803115, 0.97823614, -0.086323865, 0.9764703, -0.18703479, 0.4549261, -0.0753334, 0.37513244)
+transform = Transform3D(-0.9893892, -0.1105192, -0.10285628, -0.11567041, 0.118040204, 0.9873651, -0.09714728, 0.9850289, -0.12809464, 0.4472221, -0.06303437, 0.38080624)
 bone_name = "DEF-forearm.L"
 bone_idx = 3
 
@@ -239,7 +272,7 @@ bone_idx = 3
 transform = Transform3D(0.9995366, 0, 0, 0, 1.0010792, 0, 0, 0, 0.99938244, 0, 0, 0)
 
 [node name="BoneAttachment3D2" type="BoneAttachment3D" parent="PLA/rig/Skeleton3D" index="2"]
-transform = Transform3D(0.9623442, 0.2736132, 0.024446577, -0.027926385, 0.18958558, -0.983358, -0.26997814, 0.94182014, 0.18689603, -0.39489815, 0.044299833, 0.8182795)
+transform = Transform3D(0.9578967, 0.28214547, -0.06652418, -0.12358412, 0.1932548, -0.97522277, -0.25882515, 0.9388488, 0.21546239, -0.39154375, 0.03649219, 0.8206839)
 bone_name = "DEF-palm.02.R"
 bone_idx = 41
 

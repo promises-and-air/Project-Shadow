@@ -8,6 +8,9 @@
 script = ExtResource("1_p3p47")
 charge_time_required = 1.0
 charge_duration = 2.0
+anim_name_start = "lightning_hold"
+anim_name_release = "lightning_release"
+anim_name_loop = "lightning_idle"
 light_shot = ExtResource("2_hhgum")
 heavy_shot = ExtResource("1_i3fg6")
 metadata/_custom_type_script = "uid://digtihqbqogk6"
