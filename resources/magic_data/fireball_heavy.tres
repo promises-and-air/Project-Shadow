@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_pyqfy")
 projectile_scene = ExtResource("1_0wtn7")
-scale = 2.5
-speed = 18.0
+scale = 2.0
+speed = 22.0
 damage = 70
 knockback = 1.0
 camera_shake_name = "magic_heavy"

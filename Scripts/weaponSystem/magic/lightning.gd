@@ -17,13 +17,32 @@ func _cast_beam(fade_time: float) -> void:
 	var space_state = get_world_3d().direct_space_state
 	var from = global_position
 	var to = global_position - global_transform.basis.z * max_range
+
+
+	var shape = SphereShape3D.new()
+	shape.radius = 1.0 * data.scale # Радиус зависит от scale из ресурса (например, 1.0 или 2.5)
 	
-	var query = PhysicsRayQueryParameters3D.create(from, to)
+	var query = PhysicsShapeQueryParameters3D.new()
+	query.shape = shape
+	
+	# Настраиваем позицию и поворот "толстого луча"
+	var transform = Transform3D()
+	transform.origin = from
+
+	# Давай используем motion-cast (протаскивание сферы):
+	query.transform = Transform3D.IDENTITY.translated(from)
+	query.motion = -global_transform.basis.z * max_range # Вектор движения
+	
 	query.exclude = [self, get_parent()]
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
 	
-	var result = space_state.intersect_ray(query)
+	var ray_query = PhysicsRayQueryParameters3D.create(from, to)
+	ray_query.exclude = [self, get_parent()]
+	ray_query.collide_with_areas = true
+	ray_query.collide_with_bodies = true
+	
+	var result = space_state.intersect_ray(ray_query)
 	var end_point = to 
 	
 	if result:

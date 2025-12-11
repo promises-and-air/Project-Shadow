@@ -1,8 +1,7 @@
-[gd_scene load_steps=65 format=3 uid="uid://oj3blpxqf1bl"]
+[gd_scene load_steps=62 format=3 uid="uid://oj3blpxqf1bl"]
 
 [ext_resource type="Shader" uid="uid://b3j80yuxf3akh" path="res://assets/vfx shaders/stylized_sky.gdshader" id="1_mm55q"]
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/player scenes/PlayerCharacterScene.tscn" id="1_ntwlr"]
-[ext_resource type="Texture2D" uid="uid://cv0l6qmh4nin2" path="res://Arts/Textures/kenney_prototype_textures/orange/texture_03.png" id="2_mm55q"]
 [ext_resource type="Texture2D" uid="uid://d4knya6w3dpx3" path="res://Arts/Textures/kenney_prototype_textures/dark/texture_09.png" id="3_w0nqe"]
 [ext_resource type="Texture2D" uid="uid://bmixhotjye28k" path="res://Arts/Textures/kenney_prototype_textures/dark/texture_03.png" id="4_qocv4"]
 [ext_resource type="Script" uid="uid://nm1r0occ4iy4" path="res://Scripts/Others/JumppadScript.gd" id="5_4mrtq"]
@@ -108,21 +107,9 @@ adjustment_saturation = 1.3
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_nhlve"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3yst"]
-albedo_texture = ExtResource("2_mm55q")
-uv1_scale = Vector3(0.5, 0.5, 0.5)
-uv1_triplanar = true
-uv1_world_triplanar = true
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fon7x"]
 albedo_texture = ExtResource("3_w0nqe")
 uv1_triplanar = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_st80m"]
-albedo_texture = ExtResource("3_w0nqe")
-metallic_specular = 0.0
-uv1_triplanar = true
-uv1_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygjqq"]
 albedo_texture = ExtResource("4_qocv4")
@@ -225,76 +212,11 @@ directional_shadow_max_distance = 256.0
 
 [node name="PlayerCharacterV2" parent="PlayerCharacter" instance=ExtResource("1_ntwlr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.5544, 1.54036, 0)
-mouse_sense = 0.07
+mouse_sense = 0.04
 mantle_max_height = 2.5
 mantle_min_height = 0.5
 
 [node name="Map" type="Node3D" parent="."]
-
-[node name="WalkableWalls" type="Node3D" parent="Map"]
-
-[node name="WalkableWall" type="CSGBox3D" parent="Map/WalkableWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9267, 3.94576, 122.859)
-layers = 4
-material_override = SubResource("StandardMaterial3D_h3yst")
-use_collision = true
-collision_layer = 4
-collision_mask = 0
-size = Vector3(45, 8, 0)
-
-[node name="WalkableWall4" type="CSGBox3D" parent="Map/WalkableWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -225.574, 3.94576, 122.859)
-layers = 4
-material_override = SubResource("StandardMaterial3D_h3yst")
-use_collision = true
-collision_layer = 4
-collision_mask = 0
-size = Vector3(55.356, 8, 0)
-
-[node name="WalkableWall6" type="CSGBox3D" parent="Map/WalkableWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.052, 3.94576, 122.859)
-layers = 4
-material_override = SubResource("StandardMaterial3D_h3yst")
-use_collision = true
-collision_layer = 4
-collision_mask = 0
-size = Vector3(52.9949, 8, 0)
-
-[node name="WalkableWall5" type="CSGBox3D" parent="Map/WalkableWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -183.596, 3.94576, 110.841)
-layers = 4
-material_override = SubResource("StandardMaterial3D_h3yst")
-use_collision = true
-collision_layer = 4
-collision_mask = 0
-size = Vector3(57.5216, 8, 0)
-
-[node name="WalkableWall3" type="CSGBox3D" parent="Map/WalkableWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.9646, 3.94576, 122.859)
-layers = 4
-material_override = SubResource("StandardMaterial3D_h3yst")
-use_collision = true
-collision_layer = 4
-collision_mask = 0
-size = Vector3(24, 8, 0)
-
-[node name="WalkableWall2" type="CSGBox3D" parent="Map/WalkableWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.4088, 3.94576, 116.746)
-layers = 4
-material_override = SubResource("StandardMaterial3D_h3yst")
-use_collision = true
-collision_layer = 4
-collision_mask = 0
-size = Vector3(24, 8, 0)
-
-[node name="WalkableWall7" type="CSGBox3D" parent="Map/WalkableWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103.134, 3.94576, 114.059)
-layers = 4
-material_override = SubResource("StandardMaterial3D_h3yst")
-use_collision = true
-collision_layer = 4
-collision_mask = 0
-size = Vector3(34.8449, 8, 0)
 
 [node name="Blocks" type="Node3D" parent="Map"]
 
@@ -304,20 +226,11 @@ layers = 4
 use_collision = true
 collision_layer = 4
 collision_mask = 0
-size = Vector3(260, 1, 210)
+size = Vector3(310, 1, 310)
 material = SubResource("StandardMaterial3D_fon7x")
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(0.999956, -0.00940719, 0, 0.00940719, 0.999956, 0, 0, 0, 1, -2.09055, 4.20324, 0.864672)
-layers = 4
-use_collision = true
-collision_layer = 4
-collision_mask = 0
-size = Vector3(0.001, 8, 120.154)
-material = SubResource("StandardMaterial3D_st80m")
-
 [node name="CSGBox3D2" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(-4.37114e-08, 0.642788, 0.766044, 0, 0.766044, -0.642788, -1, -2.80971e-08, -3.34849e-08, -163.619, 21.5158, -67.1354)
+transform = Transform3D(-1, -5.6194253e-08, -6.696975e-08, 1.3027011e-15, 0.766044, -0.642788, 8.742279e-08, -0.642788, -0.766044, -114.8797, 21.5158, -30.400696)
 layers = 4
 material_override = SubResource("StandardMaterial3D_ygjqq")
 use_collision = true
@@ -326,7 +239,7 @@ collision_mask = 0
 size = Vector3(14, 1, 70)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(-4.37114e-08, 0.5, 0.866025, 0, 0.866025, -0.5, -1, -2.18557e-08, -3.78552e-08, -130.606, 23.5035, -4.44917)
+transform = Transform3D(1.0000001, 3.5527137e-15, 4.6185278e-14, 0, 0.8660251, -0.50000006, -1.4210855e-14, 0.5, 0.866025, -89.606, 23.5035, -11.449169)
 layers = 4
 material_override = SubResource("StandardMaterial3D_ygjqq")
 use_collision = true
@@ -335,7 +248,7 @@ collision_mask = 0
 size = Vector3(14, 1, 140)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.145, 43.895, -60.14)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -107.88431, 43.895, 21.125301)
 layers = 4
 material_override = SubResource("StandardMaterial3D_ygjqq")
 use_collision = true
@@ -344,13 +257,13 @@ collision_mask = 0
 size = Vector3(50, 1, 28)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.97, 58.44, -11.413)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.17377, 58.420788, -85.87078)
 layers = 4
 material_override = SubResource("StandardMaterial3D_ygjqq")
 use_collision = true
 collision_layer = 4
 collision_mask = 0
-size = Vector3(50, 1, 28)
+size = Vector3(34, 1, 28)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Map/Blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -214.465, 19.9437, 1.90478)
@@ -362,7 +275,7 @@ collision_mask = 0
 size = Vector3(25, 1, 35.7637)
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -162.839, 24.2194, 60.1357)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -89.839005, 24.2194, 75.1357)
 layers = 4
 material_override = SubResource("StandardMaterial3D_linps")
 use_collision = true
@@ -370,8 +283,17 @@ collision_layer = 4
 collision_mask = 0
 size = Vector3(35.1389, 1, 19.9894)
 
+[node name="CSGBox3D12" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.408455, 24.2194, 53.135696)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(16, 1, 19.9894)
+
 [node name="CSGBox3D11" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102.932, 24.2194, 60.1357)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138.932, 24.2194, 92.1357)
 layers = 4
 material_override = SubResource("StandardMaterial3D_linps")
 use_collision = true
@@ -380,7 +302,7 @@ collision_mask = 0
 size = Vector3(35.1389, 1, 19.9894)
 
 [node name="CSGBox3D14" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.53295, 0.80533504, 27.902527)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -31.231682, 0.80533504, 75.64052)
 layers = 4
 material_override = SubResource("StandardMaterial3D_linps")
 use_collision = true
@@ -389,7 +311,7 @@ collision_mask = 0
 size = Vector3(10, 4, 10)
 
 [node name="CSGBox3D15" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.17762, 6.391674, 30.882877)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -28.251331, 6.391674, 90.28519)
 layers = 4
 material_override = SubResource("StandardMaterial3D_linps")
 use_collision = true
@@ -398,7 +320,7 @@ collision_mask = 0
 size = Vector3(10, 4, 10)
 
 [node name="CSGBox3D16" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.17762, 11.257219, 48.690628)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.443581, 11.257219, 90.28519)
 layers = 4
 material_override = SubResource("StandardMaterial3D_linps")
 use_collision = true
@@ -407,7 +329,7 @@ collision_mask = 0
 size = Vector3(10, 4, 10)
 
 [node name="CSGBox3D17" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.165108, 17.539103, 61.007515)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.8733063, 17.539103, 102.272675)
 layers = 4
 material_override = SubResource("StandardMaterial3D_linps")
 use_collision = true
@@ -415,8 +337,26 @@ collision_layer = 4
 collision_mask = 0
 size = Vector3(10, 4, 10)
 
+[node name="CSGBox3D18" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17.126694, 23.539103, 111.272675)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(10, 4, 10)
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -83.62669, 46.5391, 129.77267)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(36, 2, 97)
+
 [node name="CSGBox3D13" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.816, 2.3, -14.332)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -126.815994, 2.3, -24.332)
 layers = 4
 material_override = SubResource("StandardMaterial3D_linps")
 use_collision = true
@@ -425,7 +365,7 @@ collision_mask = 0
 size = Vector3(16.975, 0.5, 16.558)
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -214.465, 19.9437, -76.0135)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -170.465, 19.9437, 3.9865036)
 layers = 4
 material_override = SubResource("StandardMaterial3D_linps")
 use_collision = true
@@ -434,22 +374,49 @@ collision_mask = 0
 size = Vector3(25, 1, 37.7349)
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -185.348, 24.7802, -102.014)
+transform = Transform3D(-4.371139e-08, 0, -1, 1, -4.371139e-08, -4.371139e-08, -4.371139e-08, -1, 1.9106855e-15, -18.597546, 4.9437, -108.0135)
 layers = 4
 material_override = SubResource("StandardMaterial3D_linps")
 use_collision = true
 collision_layer = 4
 collision_mask = 0
-size = Vector3(24.9877, 1, 25.8487)
+size = Vector3(17, 1, 40)
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.529, 29.0835, -102.014)
+transform = Transform3D(-4.371139e-08, 0, -1, 1, -4.371139e-08, -4.371139e-08, -4.371139e-08, -1, 1.9106855e-15, -46.597546, 4.4437, -99.0135)
 layers = 4
 material_override = SubResource("StandardMaterial3D_linps")
 use_collision = true
 collision_layer = 4
 collision_mask = 0
-size = Vector3(24.9877, 1, 25.8487)
+size = Vector3(16, 1, 40)
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-4.371139e-08, 0, -1, 1, -4.371139e-08, -4.371139e-08, -4.371139e-08, -1, 1.9106855e-15, -116.59755, 4.4437, -99.0135)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(16, 1, 40)
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-4.371139e-08, 0, -1, 1, -4.371139e-08, -4.371139e-08, -4.371139e-08, -1, 1.9106855e-15, -78.59755, 4.9437, -108.0135)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(17, 1, 40)
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="Map/Blocks"]
+transform = Transform3D(-4.371139e-08, 0, -1, 1, -4.371139e-08, -4.371139e-08, -4.371139e-08, -1, 1.9106855e-15, -147.59755, 4.4437, -108.0135)
+layers = 4
+material_override = SubResource("StandardMaterial3D_linps")
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(16, 1, 40)
 
 [node name="convert" parent="Map/Blocks" instance=ExtResource("6_w0nqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.631329, 0.74974513, -1)
@@ -457,7 +424,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.631329, 0.74974513, -1)
 [node name="Jumppads" type="Node3D" parent="Map"]
 
 [node name="Jumppad" type="CSGCylinder3D" parent="Map/Jumppads"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.705, 0, 28.688)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.705, 0, 28.688)
 layers = 4
 material_override = SubResource("StandardMaterial3D_rd3mg")
 use_collision = true
@@ -475,7 +442,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0425774, 0)
 shape = SubResource("CylinderShape3D_vm7yl")
 
 [node name="Jumppad3" type="CSGCylinder3D" parent="Map/Jumppads"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -220.88, 44.4149, -62.1605)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -109.880005, 44.4149, 9.8395)
 layers = 4
 material_override = SubResource("StandardMaterial3D_rd3mg")
 use_collision = true
@@ -493,7 +460,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0425774, 0)
 shape = SubResource("CylinderShape3D_vm7yl")
 
 [node name="Jumppad2" type="CSGCylinder3D" parent="Map/Jumppads"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -203.661, 0, 61.165)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -167.661, 0, -32.835)
 layers = 4
 material_override = SubResource("StandardMaterial3D_rd3mg")
 use_collision = true
